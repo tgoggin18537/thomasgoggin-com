@@ -1,0 +1,573 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Thomas Goggin · voice-matched AI bots</title>
+  <meta name="description" content="Solo operator building voice-matched AI bots for service businesses." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body data-voice="real">
+  <!-- voice toggle -->
+  <button class="voice-toggle" id="voiceToggle" aria-label="Toggle voice">
+    <span class="voice-toggle-track">
+      <span class="voice-toggle-thumb"></span>
+    </span>
+    <span class="voice-toggle-labels">
+      <span data-voice-state="formal">FORMAL</span>
+      <span data-voice-state="real">REAL</span>
+    </span>
+  </button>
+
+  <!-- top nav -->
+  <nav class="nav">
+    <a href="#" class="logo">TG</a>
+    <ul>
+      <li><a href="#work">work</a></li>
+      <li><a href="#approach">approach</a></li>
+      <li><a href="#stack">stack</a></li>
+      <li><a href="#contact">contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- hero -->
+  <section class="hero">
+    <div class="hero-copy">
+      <h1>
+        <span class="display">
+          <span data-formal="I build voice-matched AI agents" data-real="I build AI that doesnt sound like AI">I build AI that doesnt sound like AI</span>
+        </span>
+        <span class="display-muted">
+          <span data-formal="for service-based businesses." data-real="for businesses on the cutting edge.">for businesses on the cutting edge.</span>
+        </span>
+      </h1>
+      <p class="hero-sub">
+        <span data-formal="A small set of recent work. Click any station to explore." data-real="A few of them are in the room with us, click around.">A few of them are in the room with us, click around.</span>
+      </p>
+    </div>
+
+    <!-- isometric office scene -->
+    <div class="scene-wrap" aria-hidden="false">
+      <div class="scene-label">
+        <span class="scene-label-dot"></span>
+        <span data-formal="Operations floor · interactive" data-real="the floor · click anything">the floor · click anything</span>
+      </div>
+
+      <svg class="scene" viewBox="70 80 1040 540" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" shape-rendering="crispEdges">
+        <!-- ambient floor glow -->
+        <defs>
+          <radialGradient id="amber-glow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#FFB800" stop-opacity="0.35" />
+            <stop offset="60%" stop-color="#FFB800" stop-opacity="0.08" />
+            <stop offset="100%" stop-color="#FFB800" stop-opacity="0" />
+          </radialGradient>
+          <radialGradient id="purple-glow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#A855F7" stop-opacity="0.45" />
+            <stop offset="60%" stop-color="#A855F7" stop-opacity="0.1" />
+            <stop offset="100%" stop-color="#A855F7" stop-opacity="0" />
+          </radialGradient>
+          <radialGradient id="oc-amber-glow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#FFB800" stop-opacity="0.55" />
+            <stop offset="55%" stop-color="#FFB800" stop-opacity="0.12" />
+            <stop offset="100%" stop-color="#FFB800" stop-opacity="0" />
+          </radialGradient>
+          <linearGradient id="oc-sand-top" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#FFD66B" stop-opacity="0.42" />
+            <stop offset="60%" stop-color="#FFB800" stop-opacity="0.18" />
+            <stop offset="100%" stop-color="#FFB800" stop-opacity="0" />
+          </linearGradient>
+          <linearGradient id="oc-sand-bottom" x1="0" y1="1" x2="0" y2="0">
+            <stop offset="0%" stop-color="#FFD66B" stop-opacity="0.42" />
+            <stop offset="60%" stop-color="#FFB800" stop-opacity="0.18" />
+            <stop offset="100%" stop-color="#FFB800" stop-opacity="0" />
+          </linearGradient>
+          <radialGradient id="oc-waist-pulse" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#FFE08A" stop-opacity="0.95" />
+            <stop offset="60%" stop-color="#FFB800" stop-opacity="0.25" />
+            <stop offset="100%" stop-color="#FFB800" stop-opacity="0" />
+          </radialGradient>
+          <filter id="oc-glow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="2.4" result="blur" />
+            <feMerge>
+              <feMergeNode in="blur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+          <linearGradient id="floor-grad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#1a1f2e" />
+            <stop offset="100%" stop-color="#0d1018" />
+          </linearGradient>
+          <pattern id="floor-tiles" x="0" y="0" width="60" height="30" patternUnits="userSpaceOnUse" patternTransform="skewX(-30)">
+            <rect width="60" height="30" fill="#141a26" />
+            <rect width="60" height="30" fill="none" stroke="#1f2737" stroke-width="1" />
+          </pattern>
+        </defs>
+
+        <!-- floor -->
+        <polygon points="200,200 1100,200 1200,650 100,650" fill="url(#floor-grad)" />
+        <polygon points="200,200 1100,200 1200,650 100,650" fill="url(#floor-tiles)" opacity="0.6" />
+
+        <!-- back wall hint -->
+        <polygon points="200,200 1100,200 1100,80 200,80" fill="#0a0d14" opacity="0.6" />
+        <polygon points="200,200 200,80 100,140 100,650 200,650" fill="#080a10" opacity="0.4" />
+
+        <!-- ============================ -->
+        <!-- mine: little star scene, back-right (no walls, autoplay) -->
+        <!-- ============================ -->
+        <g class="station station-mine" data-station="outtcast" tabindex="0" role="button" aria-label="Open">
+        <g transform="translate(540 20) scale(0.45)">
+          <!-- generous click target -->
+          <rect class="mine-hit" x="800" y="140" width="300" height="220" fill="transparent" />
+          <!-- soft amber glow behind -->
+          <ellipse cx="950" cy="250" rx="200" ry="140" fill="url(#oc-amber-glow)" class="station-glow" opacity="0.7" />
+          <!-- ambient field stars (auto-twinkle, all gold) -->
+          <g class="oc-field">
+            <circle class="oc-field-star" cx="850" cy="170" r="0.9" fill="#FFD66B" />
+            <circle class="oc-field-star" cx="1060" cy="190" r="0.9" fill="#FFD66B" />
+            <circle class="oc-field-star" cx="855" cy="350" r="0.9" fill="#FFD66B" />
+            <circle class="oc-field-star" cx="1055" cy="350" r="0.9" fill="#FFD66B" />
+            <circle class="oc-field-star" cx="820" cy="240" r="0.8" fill="#FFC94A" />
+            <circle class="oc-field-star" cx="1080" cy="260" r="0.8" fill="#FFC94A" />
+            <circle class="oc-field-star" cx="830" cy="195" r="0.8" fill="#FFD66B" />
+            <circle class="oc-field-star" cx="1075" cy="345" r="0.8" fill="#FFD66B" />
+            <circle class="oc-field-star" cx="830" cy="155" r="0.7" fill="#FFD66B" />
+            <circle class="oc-field-star" cx="1070" cy="155" r="0.7" fill="#FFD66B" />
+            <circle class="oc-field-star" cx="810" cy="340" r="0.7" fill="#FFC94A" />
+            <circle class="oc-field-star" cx="1090" cy="195" r="0.7" fill="#FFC94A" />
+            <circle class="oc-field-star" cx="800" cy="280" r="0.6" fill="#FFD66B" />
+            <circle class="oc-field-star" cx="1095" cy="295" r="0.6" fill="#FFD66B" />
+            <circle class="oc-field-star" cx="950" cy="148" r="0.5" fill="#FFD66B" />
+            <circle class="oc-field-star" cx="950" cy="355" r="0.5" fill="#FFD66B" />
+          </g>
+          <!-- constellation: hourglass, filled sand, glowing waist -->
+          <g class="outtcast-constellation" filter="url(#oc-glow)">
+            <!-- glowing waist halo (radial pulse behind center) -->
+            <circle class="oc-waist-halo" cx="950" cy="250" r="26" fill="url(#oc-waist-pulse)" />
+            <!-- filled sand triangles (top + bottom) -->
+            <polygon class="oc-sand oc-sand-top" points="880,180 1020,180 950,250" fill="url(#oc-sand-top)" />
+            <polygon class="oc-sand oc-sand-bottom" points="880,320 1020,320 950,250" fill="url(#oc-sand-bottom)" />
+            <!-- two counter-rotating orbit rings -->
+            <circle class="oc-orbit oc-orbit-cw" cx="950" cy="250" r="100" fill="none" stroke="#FFB800" stroke-width="0.6" stroke-dasharray="2 6" opacity="0.4" />
+            <circle class="oc-orbit oc-orbit-ccw" cx="950" cy="250" r="112" fill="none" stroke="#FFD66B" stroke-width="0.5" stroke-dasharray="1 11" opacity="0.25" />
+            <!-- top + bottom bars -->
+            <line class="oc-line" x1="880" y1="180" x2="1020" y2="180" stroke="#FFE08A" stroke-width="2.2" stroke-linecap="round" opacity="0.95" />
+            <line class="oc-line" x1="880" y1="320" x2="1020" y2="320" stroke="#FFE08A" stroke-width="2.2" stroke-linecap="round" opacity="0.95" />
+            <!-- pinched sides: curves that ACTUALLY meet at the waist -->
+            <path class="oc-line" d="M 880 180 Q 1020 250 880 320" stroke="#FFD66B" stroke-width="1.9" fill="none" stroke-linecap="round" opacity="0.95" />
+            <path class="oc-line" d="M 1020 180 Q 880 250 1020 320" stroke="#FFD66B" stroke-width="1.9" fill="none" stroke-linecap="round" opacity="0.95" />
+            <!-- sand grains falling through the pinch -->
+            <circle class="oc-grain" cx="950" cy="208" r="0.9" fill="#FFE08A" />
+            <circle class="oc-grain oc-grain-2" cx="950" cy="222" r="0.7" fill="#FFD66B" />
+            <circle class="oc-grain oc-grain-3" cx="950" cy="280" r="0.7" fill="#FFD66B" />
+            <circle class="oc-grain oc-grain-4" cx="950" cy="294" r="0.9" fill="#FFE08A" />
+            <!-- stars: corners + bar midpoints + center waist -->
+            <circle class="oc-star" cx="880" cy="180" r="2.8" fill="#FFE08A" />
+            <circle class="oc-star" cx="1020" cy="180" r="2.8" fill="#FFE08A" />
+            <circle class="oc-star" cx="880" cy="320" r="2.8" fill="#FFE08A" />
+            <circle class="oc-star" cx="1020" cy="320" r="2.8" fill="#FFE08A" />
+            <circle class="oc-star" cx="950" cy="180" r="1.8" fill="#FFD66B" />
+            <circle class="oc-star" cx="950" cy="320" r="1.8" fill="#FFD66B" />
+            <circle class="oc-star oc-star-center" cx="950" cy="250" r="5" fill="#FFE08A" />
+          </g>
+        </g>
+        </g>
+
+        <!-- ============================ -->
+        <!-- COMMAND CENTER (back wall, leadflo dashboards) -->
+        <!-- ============================ -->
+        <g class="station station-leadflo" data-station="leadflo" tabindex="0" role="button" aria-label="Open Leadflo case study">
+          <rect class="station-hit" x="220" y="95" width="430" height="245" fill="transparent" />
+          <!-- glow -->
+          <ellipse cx="380" cy="290" rx="200" ry="60" fill="url(#amber-glow)" class="station-glow" />
+
+          <!-- monitor wall (3 screens) -->
+          <g class="monitor-wall">
+            <!-- monitor 1: leads pipeline -->
+            <rect x="240" y="120" width="120" height="80" fill="#000" stroke="#2a3142" stroke-width="2" />
+            <rect x="244" y="124" width="112" height="72" fill="#0a1420" />
+            <!-- pipeline bars animating -->
+            <rect x="252" y="150" width="20" height="6" fill="#FFB800" class="bar-pulse" />
+            <rect x="280" y="150" width="35" height="6" fill="#FF6B35" class="bar-pulse" style="animation-delay:0.3s" />
+            <rect x="252" y="162" width="50" height="6" fill="#FFB800" class="bar-pulse" style="animation-delay:0.6s" />
+            <rect x="252" y="174" width="80" height="6" fill="#39FF14" class="bar-pulse" style="animation-delay:0.9s" opacity="0.7" />
+            <text x="252" y="140" fill="#FFB800" font-family="JetBrains Mono" font-size="8">PIPELINE</text>
+
+            <!-- monitor 2: live activity feed -->
+            <rect x="370" y="100" width="140" height="100" fill="#000" stroke="#2a3142" stroke-width="2" />
+            <rect x="374" y="104" width="132" height="92" fill="#0a1420" />
+            <text x="380" y="118" fill="#FFB800" font-family="JetBrains Mono" font-size="8">LEADS</text>
+            <g class="ticker">
+              <text x="380" y="135" fill="#9CA3AF" font-family="JetBrains Mono" font-size="7" class="tick-line">+ HVAC inquiry</text>
+              <text x="380" y="148" fill="#9CA3AF" font-family="JetBrains Mono" font-size="7" class="tick-line" style="animation-delay:1.5s">+ booking confirmed</text>
+              <text x="380" y="161" fill="#9CA3AF" font-family="JetBrains Mono" font-size="7" class="tick-line" style="animation-delay:3s">+ SMS reply received</text>
+              <text x="380" y="174" fill="#39FF14" font-family="JetBrains Mono" font-size="7" class="tick-line" style="animation-delay:4.5s">$ qualified</text>
+            </g>
+
+            <!-- monitor 3: KPIs -->
+            <rect x="520" y="120" width="120" height="80" fill="#000" stroke="#2a3142" stroke-width="2" />
+            <rect x="524" y="124" width="112" height="72" fill="#0a1420" />
+            <text x="530" y="140" fill="#FFB800" font-family="JetBrains Mono" font-size="8">KPI</text>
+            <text x="530" y="158" fill="#fff" font-family="Inter Tight" font-size="14" font-weight="700">+312%</text>
+            <text x="530" y="172" fill="#9CA3AF" font-family="JetBrains Mono" font-size="6">qual. lead rate</text>
+            <text x="530" y="186" fill="#fff" font-family="Inter Tight" font-size="11" font-weight="700">42s</text>
+            <text x="530" y="194" fill="#9CA3AF" font-family="JetBrains Mono" font-size="6">avg. response</text>
+          </g>
+
+          <!-- desk -->
+          <polygon points="220,220 660,220 680,260 200,260" fill="#1f2737" stroke="#2a3142" stroke-width="1" />
+          <polygon points="200,260 680,260 680,290 200,290" fill="#161c2a" />
+
+          <!-- pixel character at command center -->
+          <g transform="translate(420 185) scale(1.5)">
+            <g class="pixel-char char-leadflo">
+              <rect x="0" y="0" width="16" height="16" fill="#e8c39e" />
+              <rect x="2" y="2" width="12" height="2" fill="#3a2e1f" />
+              <rect x="4" y="6" width="2" height="2" fill="#1a0f08" />
+              <rect x="10" y="6" width="2" height="2" fill="#1a0f08" />
+              <rect x="-2" y="16" width="20" height="14" fill="#FFB800" />
+              <rect x="-2" y="16" width="20" height="2" fill="#cc9300" />
+            </g>
+          </g>
+
+          <text x="440" y="320" text-anchor="middle" fill="#FFB800" font-family="JetBrains Mono" font-size="18" letter-spacing="2.8" font-weight="600">BACKEND</text>
+          <text x="440" y="338" text-anchor="middle" fill="#9CA3AF" font-family="JetBrains Mono" font-size="12">custom systems</text>
+        </g>
+
+        <!-- ============================ -->
+        <!-- RECEPTION DESK (front-left) -->
+        <!-- ============================ -->
+        <g class="station station-reception" data-station="reception" tabindex="0" role="button" aria-label="Open AI receptionist case study">
+          <rect class="station-hit" x="70" y="380" width="310" height="210" fill="transparent" />
+          <ellipse cx="220" cy="500" rx="160" ry="55" fill="url(#amber-glow)" class="station-glow" />
+
+          <!-- curved reception desk -->
+          <polygon points="120,440 320,440 360,490 80,490" fill="#1f2737" stroke="#2a3142" stroke-width="1" />
+          <polygon points="80,490 360,490 360,520 80,520" fill="#161c2a" />
+          <!-- desk top reflection -->
+          <polygon points="130,445 310,445 340,485 100,485" fill="#252d40" opacity="0.5" />
+
+          <!-- phone (with antenna pulse when ringing) -->
+          <g class="phone-rig">
+            <rect x="155" y="425" width="30" height="18" fill="#0a0d14" stroke="#FF6B35" stroke-width="1.5" class="phone-base" />
+            <rect x="160" y="429" width="20" height="3" fill="#FF6B35" class="phone-light" />
+            <!-- ringing arcs -->
+            <g class="phone-ring">
+              <path d="M 145 415 Q 135 410 140 400" stroke="#FF6B35" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.8" />
+              <path d="M 195 415 Q 205 410 200 400" stroke="#FF6B35" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.8" />
+            </g>
+          </g>
+
+          <!-- pixel receptionist -->
+          <g transform="translate(245 395) scale(1.5)">
+            <g class="pixel-char char-receptionist">
+              <rect x="0" y="0" width="16" height="16" fill="#f4d4b0" />
+              <rect x="0" y="0" width="16" height="3" fill="#5a3a1a" />
+              <rect x="2" y="3" width="12" height="2" fill="#5a3a1a" />
+              <rect x="4" y="7" width="2" height="2" fill="#1a0f08" />
+              <rect x="10" y="7" width="2" height="2" fill="#1a0f08" />
+              <rect x="6" y="11" width="4" height="1" fill="#a05530" class="mouth-talk" />
+              <rect x="-2" y="16" width="20" height="14" fill="#FF6B35" />
+              <rect x="-2" y="2" width="2" height="6" fill="#1a1a1a" />
+              <rect x="16" y="2" width="2" height="6" fill="#1a1a1a" />
+            </g>
+          </g>
+
+          <!-- floating SMS bubble -->
+          <g class="float-bubble bubble-1">
+            <rect x="280" y="380" width="80" height="22" rx="11" fill="#FFB800" />
+            <text x="320" y="394" text-anchor="middle" fill="#0a0d14" font-family="JetBrains Mono" font-size="8" font-weight="700">booked ✓</text>
+          </g>
+
+          <text x="220" y="555" text-anchor="middle" fill="#FFB800" font-family="JetBrains Mono" font-size="18" letter-spacing="2.8" font-weight="600">RECEPTIONIST</text>
+          <text x="220" y="573" text-anchor="middle" fill="#9CA3AF" font-family="JetBrains Mono" font-size="12">voice ai · books calls 24/7</text>
+        </g>
+
+        <!-- ============================ -->
+        <!-- PHONE BAY (right side, spiffy travel) -->
+        <!-- ============================ -->
+        <g class="station station-spiffy" data-station="spiffy" tabindex="0" role="button" aria-label="Open Spiffy case study">
+          <rect class="station-hit" x="770" y="375" width="320" height="220" fill="transparent" />
+          <ellipse cx="930" cy="510" rx="170" ry="55" fill="url(#amber-glow)" class="station-glow" />
+
+          <!-- desk -->
+          <polygon points="820,455 1040,455 1080,505 780,505" fill="#1f2737" stroke="#2a3142" stroke-width="1" />
+          <polygon points="780,505 1080,505 1080,535 780,535" fill="#161c2a" />
+
+          <!-- monitor with travel SMS -->
+          <rect x="850" y="380" width="130" height="80" fill="#000" stroke="#2a3142" stroke-width="2" />
+          <rect x="854" y="384" width="122" height="72" fill="#0a1420" />
+          <!-- chat bubbles on screen -->
+          <g class="travel-chat">
+            <rect x="858" y="392" width="60" height="12" rx="6" fill="#FFB800" class="chat-msg" style="animation-delay:0s" />
+            <rect x="908" y="408" width="64" height="12" rx="6" fill="#2a3142" class="chat-msg" style="animation-delay:1.5s" />
+            <rect x="858" y="424" width="80" height="12" rx="6" fill="#FFB800" class="chat-msg" style="animation-delay:3s" />
+            <rect x="908" y="440" width="50" height="12" rx="6" fill="#2a3142" class="chat-msg" style="animation-delay:4.5s" />
+          </g>
+
+          <!-- pixel char with headset -->
+          <g transform="translate(910 410) scale(1.5)">
+            <g class="pixel-char char-spiffy">
+              <rect x="0" y="0" width="16" height="16" fill="#e8c39e" />
+              <rect x="0" y="0" width="16" height="4" fill="#1a1a1a" />
+              <rect x="2" y="4" width="12" height="2" fill="#1a1a1a" />
+              <rect x="4" y="7" width="2" height="2" fill="#1a0f08" />
+              <rect x="10" y="7" width="2" height="2" fill="#1a0f08" />
+              <rect x="6" y="11" width="4" height="1" fill="#a05530" class="mouth-talk" style="animation-delay:0.3s" />
+              <rect x="-2" y="16" width="20" height="14" fill="#39bdef" />
+              <rect x="16" y="6" width="4" height="2" fill="#1a1a1a" />
+              <rect x="20" y="6" width="2" height="6" fill="#1a1a1a" />
+            </g>
+          </g>
+
+          <!-- floating envelope (booking) -->
+          <g class="float-bubble bubble-2">
+            <rect x="780" y="400" width="60" height="20" rx="3" fill="#39FF14" opacity="0.9" />
+            <text x="810" y="413" text-anchor="middle" fill="#0a0d14" font-family="JetBrains Mono" font-size="7" font-weight="700">$1,840 ✈</text>
+          </g>
+
+          <text x="920" y="565" text-anchor="middle" fill="#FFB800" font-family="JetBrains Mono" font-size="18" letter-spacing="2.8" font-weight="600">SMS SALES</text>
+          <text x="920" y="583" text-anchor="middle" fill="#9CA3AF" font-family="JetBrains Mono" font-size="12">spring break travel</text>
+        </g>
+
+        <!-- ============================ -->
+        <!-- TEXTING DESK (mid-center, ava setter) -->
+        <!-- ============================ -->
+        <g class="station station-ava" data-station="ava" tabindex="0" role="button" aria-label="Open Ava case study">
+          <!-- generous click target -->
+          <rect class="station-hit" x="470" y="395" width="280" height="195" fill="transparent" />
+          <ellipse cx="600" cy="500" rx="150" ry="50" fill="url(#amber-glow)" class="station-glow" />
+
+          <!-- desk -->
+          <polygon points="510,455 700,455 730,500 490,500" fill="#1f2737" stroke="#2a3142" stroke-width="1" />
+          <polygon points="490,500 730,500 730,525 490,525" fill="#161c2a" />
+
+          <!-- laptop -->
+          <polygon points="540,420 670,420 690,455 525,455" fill="#0a0d14" stroke="#2a3142" stroke-width="1" />
+          <rect x="545" y="425" width="120" height="25" fill="#0a1420" />
+          <!-- typing on screen -->
+          <g class="ava-typing">
+            <rect x="552" y="430" width="40" height="3" fill="#FFB800" class="type-line" style="animation-delay:0s" />
+            <rect x="552" y="437" width="60" height="3" fill="#9CA3AF" class="type-line" style="animation-delay:1s" />
+            <rect x="552" y="444" width="35" height="3" fill="#9CA3AF" class="type-line" style="animation-delay:2s" />
+          </g>
+
+          <!-- pixel char -->
+          <g transform="translate(595 395) scale(1.5)">
+            <g class="pixel-char char-ava">
+              <rect x="0" y="0" width="16" height="16" fill="#f4d4b0" />
+              <rect x="0" y="0" width="16" height="2" fill="#8a4a20" />
+              <rect x="0" y="0" width="2" height="10" fill="#8a4a20" />
+              <rect x="14" y="0" width="2" height="10" fill="#8a4a20" />
+              <rect x="4" y="7" width="2" height="2" fill="#1a0f08" />
+              <rect x="10" y="7" width="2" height="2" fill="#1a0f08" />
+              <rect x="6" y="11" width="4" height="1" fill="#a05530" class="mouth-talk" style="animation-delay:0.6s" />
+              <rect x="-2" y="16" width="20" height="14" fill="#A855F7" />
+            </g>
+          </g>
+
+          <text x="610" y="555" text-anchor="middle" fill="#FFB800" font-family="JetBrains Mono" font-size="18" letter-spacing="2.8" font-weight="600">SMS SETTER</text>
+          <text x="610" y="573" text-anchor="middle" fill="#9CA3AF" font-family="JetBrains Mono" font-size="12">concierge medical</text>
+        </g>
+
+        <!-- floating ambient particles -->
+        <g class="ambient-particles">
+          <circle cx="500" cy="300" r="1.5" fill="#FFB800" class="particle" style="animation-delay:0s" />
+          <circle cx="700" cy="350" r="1" fill="#FFB800" class="particle" style="animation-delay:2s" />
+          <circle cx="350" cy="400" r="1.5" fill="#A855F7" class="particle" style="animation-delay:4s" />
+          <circle cx="850" cy="280" r="1" fill="#FFB800" class="particle" style="animation-delay:1s" />
+          <circle cx="600" cy="380" r="1" fill="#FFB800" class="particle" style="animation-delay:3s" />
+        </g>
+      </svg>
+    </div>
+  </section>
+
+  <!-- case study panels (revealed on click) -->
+  <div class="case-overlay" id="caseOverlay">
+    <button class="case-close" id="caseClose" aria-label="Close">×</button>
+    <div class="case-content" id="caseContent"><!-- populated by JS --></div>
+  </div>
+
+  <!-- approach -->
+  <section class="approach" id="approach">
+    <div class="section-label">approach</div>
+    <h2 class="section-h">
+      <span data-formal="Engineered systems that sound like the people running them." data-real="Bots that sound like the actual humans behind the business.">Bots that sound like the actual humans behind the business.</span>
+    </h2>
+    <div class="approach-grid">
+      <div class="approach-item">
+        <div class="approach-num">01</div>
+        <h3 data-formal="Listen first." data-real="Listen first">Listen first</h3>
+        <p>
+          <span data-formal="Before any code is written, I collect every past message, call, pitch, and email I can gather from you and your team. The bot is built from your team's actual voice, not from a template applied to every client." data-real="Before I write a single line of code, I collect as many past texts, calls, pitches, emails etc from you and your team as I can get my hands on. The bot gets built from THEIR voice, not from a template I reuse on everyone.">Before I write a single line of code, I collect as many past texts, calls, pitches, emails etc from you and your team as I can get my hands on. The bot gets built from THEIR voice, not from a template I reuse on everyone.</span>
+        </p>
+      </div>
+      <div class="approach-item">
+        <div class="approach-num">02</div>
+        <h3 data-formal="Live evaluation pipelines." data-real="Live evaluation pipelines">Live evaluation pipelines</h3>
+        <p>
+          <span data-formal="Every outbound message runs through an evaluation pipeline before it sends. Each one is screened for tone, accuracy, personality match, and hallucinations. Any message that fails is rewritten until it passes." data-real="Every message your bot sends gets fed through an evaluation pipeline before it goes out. We screen each one for tone, accuracy, personality match, and hallucinations. If any of them fail, the message gets rewritten until it doesnt.">Every message your bot sends gets fed through an evaluation pipeline before it goes out. We screen each one for tone, accuracy, personality match, and hallucinations. If any of them fail, the message gets rewritten until it doesnt.</span>
+        </p>
+      </div>
+      <div class="approach-item">
+        <div class="approach-num">03</div>
+        <h3 data-formal="Built to ship." data-real="Ship it like it has to work">Ship it like it has to work</h3>
+        <p>
+          <span data-formal="Built on Cloudflare Workers and Durable Objects for state, KV for sessions, and GoHighLevel for CRM continuity. Every system is tested end-to-end before ad spend is directed at it." data-real="Built on Cloudflare Workers + Durable Objects for state, KV for sessions, GHL for CRM continuity. Tested end-to-end before any ad budget touches it.">Built on Cloudflare Workers + Durable Objects for state, KV for sessions, GHL for CRM continuity. Tested end-to-end before any ad budget touches it.</span>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- stack -->
+  <section class="stack" id="stack">
+    <div class="section-label">stack</div>
+    <h2 class="section-h">
+      <span data-formal="The production stack." data-real="What I actually use. Not what sounds impressive on LinkedIn.">What I actually use. Not what sounds impressive on LinkedIn.</span>
+    </h2>
+    <div class="stack-grid">
+      <div class="stack-item" style="--rot-delay:0s">
+        <div class="stack-card">
+          <span class="stack-name">Cloudflare Workers</span>
+          <span class="stack-note" data-formal="Serverless compute." data-real="Runs everything. Cheap, fast, never down.">Runs everything. Cheap, fast, never down.</span>
+        </div>
+        <div class="stack-card">
+          <span class="stack-name">Cloudflare D1</span>
+          <span class="stack-note" data-formal="Edge SQL." data-real="Conversation history when SQL is the right shape.">Conversation history when SQL is the right shape.</span>
+        </div>
+      </div>
+      <div class="stack-item" style="--rot-delay:0.7s">
+        <div class="stack-card">
+          <span class="stack-name">Durable Objects</span>
+          <span class="stack-note" data-formal="Stateful coordination." data-real="When a conversation has to remember itself.">When a conversation has to remember itself.</span>
+        </div>
+        <div class="stack-card">
+          <span class="stack-name">Cloudflare KV</span>
+          <span class="stack-note" data-formal="Edge key-value store." data-real="Session glue, config, hot lookups.">Session glue, config, hot lookups.</span>
+        </div>
+      </div>
+      <div class="stack-item" style="--rot-delay:1.4s">
+        <div class="stack-card">
+          <span class="stack-name">GoHighLevel</span>
+          <span class="stack-note" data-formal="CRM, SMS, calendars." data-real="Where the leads live for most of my clients.">Where the leads live for most of my clients.</span>
+        </div>
+        <div class="stack-card">
+          <span class="stack-name">Twilio</span>
+          <span class="stack-note" data-formal="Telephony layer." data-real="The actual phone numbers under the bots.">The actual phone numbers under the bots.</span>
+        </div>
+      </div>
+      <div class="stack-item" style="--rot-delay:2.1s">
+        <div class="stack-card">
+          <span class="stack-name">Retell AI</span>
+          <span class="stack-note" data-formal="Voice agents." data-real="When the bot needs to talk, not text.">When the bot needs to talk, not text.</span>
+        </div>
+        <div class="stack-card">
+          <span class="stack-name">Cal.com</span>
+          <span class="stack-note" data-formal="Calendar API." data-real="Real availability when the bot says yes.">Real availability when the bot says yes.</span>
+        </div>
+      </div>
+      <div class="stack-item" style="--rot-delay:2.8s">
+        <div class="stack-card">
+          <span class="stack-name">Anthropic SDK</span>
+          <span class="stack-note" data-formal="Claude Sonnet & Haiku." data-real="Sonnet for the hard turns, Haiku for the cheap ones.">Sonnet for the hard turns, Haiku for the cheap ones.</span>
+        </div>
+        <div class="stack-card">
+          <span class="stack-name">Claude Code</span>
+          <span class="stack-note" data-formal="Agent-assisted development." data-real="The agent that ships next to me.">The agent that ships next to me.</span>
+        </div>
+      </div>
+      <div class="stack-item" style="--rot-delay:3.5s">
+        <div class="stack-card">
+          <span class="stack-name">n8n</span>
+          <span class="stack-note" data-formal="Workflow orchestration." data-real="Middleware between everything.">Middleware between everything.</span>
+        </div>
+        <div class="stack-card">
+          <span class="stack-name">Cursor</span>
+          <span class="stack-note" data-formal="Editor." data-real="Where the code actually gets written.">Where the code actually gets written.</span>
+        </div>
+      </div>
+      <div class="stack-item" style="--rot-delay:4.2s">
+        <div class="stack-card">
+          <span class="stack-name">Expo + React Native</span>
+          <span class="stack-note" data-formal="Mobile (Outtcast)." data-real="For the thing Im actually building.">For the thing Im actually building.</span>
+        </div>
+        <div class="stack-card">
+          <span class="stack-name">iOS / TestFlight</span>
+          <span class="stack-note" data-formal="Distribution channel." data-real="Where Outtcast goes next.">Where Outtcast goes next.</span>
+        </div>
+      </div>
+      <div class="stack-item" style="--rot-delay:4.9s">
+        <div class="stack-card">
+          <span class="stack-name">Supabase</span>
+          <span class="stack-note" data-formal="Backend (Outtcast)." data-real="Postgres + auth + storage. Boring on purpose.">Postgres + auth + storage. Boring on purpose.</span>
+        </div>
+        <div class="stack-card">
+          <span class="stack-name">Postgres</span>
+          <span class="stack-note" data-formal="Relational database." data-real="Where the long-term memory lives.">Where the long-term memory lives.</span>
+        </div>
+      </div>
+      <div class="stack-item" style="--rot-delay:5.6s">
+        <div class="stack-card">
+          <span class="stack-name">TypeScript</span>
+          <span class="stack-note" data-formal="Typed runtime." data-real="Catches what JS lets through.">Catches what JS lets through.</span>
+        </div>
+        <div class="stack-card">
+          <span class="stack-name">Bun</span>
+          <span class="stack-note" data-formal="JavaScript runtime." data-real="Fast scripts, no fuss.">Fast scripts, no fuss.</span>
+        </div>
+      </div>
+      <div class="stack-item" style="--rot-delay:6.3s">
+        <div class="stack-card">
+          <span class="stack-name">Wrangler</span>
+          <span class="stack-note" data-formal="Cloudflare deploy CLI." data-real="How everything actually goes live.">How everything actually goes live.</span>
+        </div>
+        <div class="stack-card">
+          <span class="stack-name">Hono</span>
+          <span class="stack-note" data-formal="Workers framework." data-real="Routing for Workers without the bloat.">Routing for Workers without the bloat.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- about / outtcast -->
+  <section class="about" id="about">
+    <div class="section-label">about</div>
+    <div class="about-grid">
+      <div class="about-bio">
+        <p class="about-lead">
+          <span data-formal="I build software that talks like the people who hired me to build it. Solo operator based in Charleston, South Carolina. University of Georgia finance graduate. What started as Upwork contracts has become a small agency." data-real="I build software that talks like the people who hired me to build it. Solo, out of Charleston. UGA finance grad. Started on Upwork, ended up running a small agency on accident.">I build software that talks like the people who hired me to build it. Solo, out of Charleston. UGA finance grad. Started on Upwork, ended up running a small agency on accident.</span>
+        </p>
+        <p class="about-quote">
+          <span data-formal="The best way to predict the future is to invent it." data-real="The best way to predict the future is to invent it.">"The best way to predict the future is to invent it."</span>
+          <span class="about-attr">/ Alan Kay</span>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- contact -->
+  <section class="contact" id="contact">
+    <div class="section-label">contact</div>
+    <h2 class="contact-h">
+      <span data-formal="Open to a small number of new engagements." data-real="If you want one of these, you know where to find me.">If you want one of these, you know where to find me.</span>
+    </h2>
+    <a href="mailto:thomas@thomasgoggin.com" class="contact-mail">thomas@thomasgoggin.com</a>
+    <p class="contact-note">
+      <span data-formal="No funnels. No discovery questionnaires. Email me." data-real="No funnel. No 'book a discovery call.' Just email me.">No funnel. No "book a discovery call." Just email me.</span>
+    </p>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-left">© <span id="year"></span> Thomas Goggin</div>
+    <div class="footer-right"><span class="dot"></span> <span data-formal="Charleston, SC." data-real="Charleston, SC.">Charleston, SC.</span></div>
+  </footer>
+
+  <!-- custom cursor -->
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
