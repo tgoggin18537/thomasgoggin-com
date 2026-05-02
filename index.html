@@ -70,33 +70,6 @@
             <stop offset="60%" stop-color="#A855F7" stop-opacity="0.1" />
             <stop offset="100%" stop-color="#A855F7" stop-opacity="0" />
           </radialGradient>
-          <radialGradient id="oc-amber-glow" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stop-color="#FFB800" stop-opacity="0.55" />
-            <stop offset="55%" stop-color="#FFB800" stop-opacity="0.12" />
-            <stop offset="100%" stop-color="#FFB800" stop-opacity="0" />
-          </radialGradient>
-          <linearGradient id="oc-sand-top" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#FFD66B" stop-opacity="0.42" />
-            <stop offset="60%" stop-color="#FFB800" stop-opacity="0.18" />
-            <stop offset="100%" stop-color="#FFB800" stop-opacity="0" />
-          </linearGradient>
-          <linearGradient id="oc-sand-bottom" x1="0" y1="1" x2="0" y2="0">
-            <stop offset="0%" stop-color="#FFD66B" stop-opacity="0.42" />
-            <stop offset="60%" stop-color="#FFB800" stop-opacity="0.18" />
-            <stop offset="100%" stop-color="#FFB800" stop-opacity="0" />
-          </linearGradient>
-          <radialGradient id="oc-waist-pulse" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stop-color="#FFE08A" stop-opacity="0.95" />
-            <stop offset="60%" stop-color="#FFB800" stop-opacity="0.25" />
-            <stop offset="100%" stop-color="#FFB800" stop-opacity="0" />
-          </radialGradient>
-          <filter id="oc-glow" x="-50%" y="-50%" width="200%" height="200%">
-            <feGaussianBlur stdDeviation="2.4" result="blur" />
-            <feMerge>
-              <feMergeNode in="blur" />
-              <feMergeNode in="SourceGraphic" />
-            </feMerge>
-          </filter>
           <linearGradient id="floor-grad" x1="0" y1="0" x2="0" y2="1">
             <stop offset="0%" stop-color="#1a1f2e" />
             <stop offset="100%" stop-color="#0d1018" />
@@ -116,93 +89,77 @@
         <polygon points="200,200 200,80 100,140 100,650 200,650" fill="#080a10" opacity="0.4" />
 
         <!-- ============================ -->
-        <!-- PRODUCTIZED OFFER (hanging neon billboard, back-center) -->
+        <!-- PRODUCTIZED OFFER (back-right corner, full-corner showcase) -->
+        <!-- billboard + kiosk display + price plate                     -->
         <!-- ============================ -->
         <g class="station station-offer" data-station="offer" tabindex="0" role="button" aria-label="Open the productized Setter Bot offer">
-          <!-- generous click target -->
-          <rect class="station-hit" x="660" y="78" width="240" height="120" fill="transparent" />
-          <!-- glow halo behind the sign -->
-          <ellipse cx="780" cy="138" rx="150" ry="55" fill="url(#purple-glow)" class="station-glow" opacity="0.85" />
-          <!-- hanging chains -->
-          <line x1="700" y1="80" x2="700" y2="100" stroke="#2a3142" stroke-width="1" />
-          <line x1="860" y1="80" x2="860" y2="100" stroke="#2a3142" stroke-width="1" />
-          <!-- sign body -->
-          <rect x="680" y="100" width="200" height="80" rx="6" fill="#0a0d14" stroke="#A855F7" stroke-width="2" class="offer-frame" />
-          <rect x="684" y="104" width="192" height="72" rx="4" fill="none" stroke="#FFB800" stroke-width="0.5" opacity="0.45" />
-          <!-- corner LEDs -->
-          <circle cx="690" cy="110" r="1.4" fill="#A855F7" class="offer-led" />
-          <circle cx="870" cy="110" r="1.4" fill="#A855F7" class="offer-led" style="animation-delay:0.7s" />
-          <circle cx="690" cy="170" r="1.4" fill="#A855F7" class="offer-led" style="animation-delay:1.4s" />
-          <circle cx="870" cy="170" r="1.4" fill="#A855F7" class="offer-led" style="animation-delay:2.1s" />
-          <!-- eyebrow -->
-          <text x="780" y="123" text-anchor="middle" fill="#A855F7" font-family="JetBrains Mono" font-size="9" letter-spacing="2.4" font-weight="600">NOW SHIPPING</text>
-          <!-- divider -->
-          <line x1="710" y1="130" x2="850" y2="130" stroke="#1f2737" stroke-width="0.5" />
-          <!-- main label -->
-          <text x="780" y="153" text-anchor="middle" fill="#FFB800" font-family="Inter Tight" font-size="20" letter-spacing="2.6" font-weight="700" class="offer-flicker">SETTER BOT</text>
-          <!-- price + cta -->
-          <text x="780" y="170" text-anchor="middle" fill="#9CA3AF" font-family="JetBrains Mono" font-size="8" letter-spacing="1.2">$3,500 + $1,200/mo · TAKE ONE →</text>
-        </g>
+          <!-- generous click target spanning the whole corner -->
+          <rect class="station-hit" x="690" y="80" width="400" height="280" fill="transparent" />
 
-        <!-- ============================ -->
-        <!-- mine: little star scene, back-right (no walls, autoplay) -->
-        <!-- ============================ -->
-        <g class="station station-mine" data-station="outtcast" tabindex="0" role="button" aria-label="Open">
-        <g transform="translate(540 20) scale(0.45)">
-          <!-- generous click target -->
-          <rect class="mine-hit" x="800" y="140" width="300" height="220" fill="transparent" />
-          <!-- soft amber glow behind -->
-          <ellipse cx="950" cy="250" rx="200" ry="140" fill="url(#oc-amber-glow)" class="station-glow" opacity="0.7" />
-          <!-- ambient field stars (auto-twinkle, all gold) -->
-          <g class="oc-field">
-            <circle class="oc-field-star" cx="850" cy="170" r="0.9" fill="#FFD66B" />
-            <circle class="oc-field-star" cx="1060" cy="190" r="0.9" fill="#FFD66B" />
-            <circle class="oc-field-star" cx="855" cy="350" r="0.9" fill="#FFD66B" />
-            <circle class="oc-field-star" cx="1055" cy="350" r="0.9" fill="#FFD66B" />
-            <circle class="oc-field-star" cx="820" cy="240" r="0.8" fill="#FFC94A" />
-            <circle class="oc-field-star" cx="1080" cy="260" r="0.8" fill="#FFC94A" />
-            <circle class="oc-field-star" cx="830" cy="195" r="0.8" fill="#FFD66B" />
-            <circle class="oc-field-star" cx="1075" cy="345" r="0.8" fill="#FFD66B" />
-            <circle class="oc-field-star" cx="830" cy="155" r="0.7" fill="#FFD66B" />
-            <circle class="oc-field-star" cx="1070" cy="155" r="0.7" fill="#FFD66B" />
-            <circle class="oc-field-star" cx="810" cy="340" r="0.7" fill="#FFC94A" />
-            <circle class="oc-field-star" cx="1090" cy="195" r="0.7" fill="#FFC94A" />
-            <circle class="oc-field-star" cx="800" cy="280" r="0.6" fill="#FFD66B" />
-            <circle class="oc-field-star" cx="1095" cy="295" r="0.6" fill="#FFD66B" />
-            <circle class="oc-field-star" cx="950" cy="148" r="0.5" fill="#FFD66B" />
-            <circle class="oc-field-star" cx="950" cy="355" r="0.5" fill="#FFD66B" />
+          <!-- corner ground glow -->
+          <ellipse cx="900" cy="320" rx="220" ry="80" fill="url(#purple-glow)" class="station-glow" opacity="0.9" />
+          <ellipse cx="900" cy="160" rx="200" ry="60" fill="url(#amber-glow)" class="station-glow" opacity="0.55" style="animation-delay:1.2s" />
+
+          <!-- hanging chains from the ceiling -->
+          <line x1="760" y1="80" x2="760" y2="100" stroke="#2a3142" stroke-width="1" />
+          <line x1="1040" y1="80" x2="1040" y2="100" stroke="#2a3142" stroke-width="1" />
+
+          <!-- BIG BILLBOARD (top) -->
+          <rect x="730" y="100" width="340" height="105" rx="8" fill="#0a0d14" stroke="#A855F7" stroke-width="2.2" class="offer-frame" />
+          <rect x="734" y="104" width="332" height="97" rx="6" fill="none" stroke="#FFB800" stroke-width="0.5" opacity="0.45" />
+          <!-- corner LEDs -->
+          <circle cx="740" cy="110" r="1.6" fill="#A855F7" class="offer-led" />
+          <circle cx="1060" cy="110" r="1.6" fill="#A855F7" class="offer-led" style="animation-delay:0.7s" />
+          <circle cx="740" cy="195" r="1.6" fill="#A855F7" class="offer-led" style="animation-delay:1.4s" />
+          <circle cx="1060" cy="195" r="1.6" fill="#A855F7" class="offer-led" style="animation-delay:2.1s" />
+          <!-- eyebrow -->
+          <text x="900" y="128" text-anchor="middle" fill="#A855F7" font-family="JetBrains Mono" font-size="11" letter-spacing="3" font-weight="600">NOW SHIPPING</text>
+          <!-- divider -->
+          <line x1="780" y1="138" x2="1020" y2="138" stroke="#1f2737" stroke-width="0.5" />
+          <!-- main label -->
+          <text x="900" y="170" text-anchor="middle" fill="#FFB800" font-family="Inter Tight" font-size="32" letter-spacing="4" font-weight="700" class="offer-flicker">SETTER BOT</text>
+          <!-- price tag -->
+          <text x="900" y="192" text-anchor="middle" fill="#9CA3AF" font-family="JetBrains Mono" font-size="10" letter-spacing="1.6">$3,500 setup · $1,200/mo</text>
+
+          <!-- KIOSK BASE (under billboard) -->
+          <!-- pedestal sides -->
+          <polygon points="780,210 1020,210 1040,250 760,250" fill="#1a1f2e" stroke="#2a3142" stroke-width="1" />
+          <!-- pedestal top edge -->
+          <polygon points="780,210 1020,210 1010,215 790,215" fill="#252d40" />
+          <!-- screen on pedestal: animated build-stage ticker -->
+          <rect x="800" y="218" width="200" height="64" fill="#000" stroke="#2a3142" stroke-width="1.5" />
+          <rect x="803" y="221" width="194" height="58" fill="#0a1420" />
+          <text x="810" y="234" fill="#A855F7" font-family="JetBrains Mono" font-size="8" letter-spacing="1.6">14 DAYS · KICKOFF TO LIVE</text>
+          <!-- ticker rows (animate each in turn) -->
+          <g class="offer-stages">
+            <text x="810" y="250" fill="#FFB800" font-family="JetBrains Mono" font-size="8" class="offer-stage" style="animation-delay:0s">DAY 1-2  · voice extraction</text>
+            <text x="810" y="262" fill="#FFB800" font-family="JetBrains Mono" font-size="8" class="offer-stage" style="animation-delay:1.6s">DAY 3-7  · build + voice tune</text>
+            <text x="810" y="274" fill="#FFB800" font-family="JetBrains Mono" font-size="8" class="offer-stage" style="animation-delay:3.2s">DAY 8-12 · CRM + calendar wire</text>
+            <text x="990" y="262" text-anchor="end" fill="#39FF14" font-family="JetBrains Mono" font-size="8" font-weight="700" class="offer-stage" style="animation-delay:4.8s">DAY 13-14 · LIVE</text>
           </g>
-          <!-- constellation: hourglass, filled sand, glowing waist -->
-          <g class="outtcast-constellation" filter="url(#oc-glow)">
-            <!-- glowing waist halo (radial pulse behind center) -->
-            <circle class="oc-waist-halo" cx="950" cy="250" r="26" fill="url(#oc-waist-pulse)" />
-            <!-- filled sand triangles (top + bottom) -->
-            <polygon class="oc-sand oc-sand-top" points="880,180 1020,180 950,250" fill="url(#oc-sand-top)" />
-            <polygon class="oc-sand oc-sand-bottom" points="880,320 1020,320 950,250" fill="url(#oc-sand-bottom)" />
-            <!-- two counter-rotating orbit rings -->
-            <circle class="oc-orbit oc-orbit-cw" cx="950" cy="250" r="100" fill="none" stroke="#FFB800" stroke-width="0.6" stroke-dasharray="2 6" opacity="0.4" />
-            <circle class="oc-orbit oc-orbit-ccw" cx="950" cy="250" r="112" fill="none" stroke="#FFD66B" stroke-width="0.5" stroke-dasharray="1 11" opacity="0.25" />
-            <!-- top + bottom bars -->
-            <line class="oc-line" x1="880" y1="180" x2="1020" y2="180" stroke="#FFE08A" stroke-width="2.2" stroke-linecap="round" opacity="0.95" />
-            <line class="oc-line" x1="880" y1="320" x2="1020" y2="320" stroke="#FFE08A" stroke-width="2.2" stroke-linecap="round" opacity="0.95" />
-            <!-- pinched sides: curves that ACTUALLY meet at the waist -->
-            <path class="oc-line" d="M 880 180 Q 1020 250 880 320" stroke="#FFD66B" stroke-width="1.9" fill="none" stroke-linecap="round" opacity="0.95" />
-            <path class="oc-line" d="M 1020 180 Q 880 250 1020 320" stroke="#FFD66B" stroke-width="1.9" fill="none" stroke-linecap="round" opacity="0.95" />
-            <!-- sand grains falling through the pinch -->
-            <circle class="oc-grain" cx="950" cy="208" r="0.9" fill="#FFE08A" />
-            <circle class="oc-grain oc-grain-2" cx="950" cy="222" r="0.7" fill="#FFD66B" />
-            <circle class="oc-grain oc-grain-3" cx="950" cy="280" r="0.7" fill="#FFD66B" />
-            <circle class="oc-grain oc-grain-4" cx="950" cy="294" r="0.9" fill="#FFE08A" />
-            <!-- stars: corners + bar midpoints + center waist -->
-            <circle class="oc-star" cx="880" cy="180" r="2.8" fill="#FFE08A" />
-            <circle class="oc-star" cx="1020" cy="180" r="2.8" fill="#FFE08A" />
-            <circle class="oc-star" cx="880" cy="320" r="2.8" fill="#FFE08A" />
-            <circle class="oc-star" cx="1020" cy="320" r="2.8" fill="#FFE08A" />
-            <circle class="oc-star" cx="950" cy="180" r="1.8" fill="#FFD66B" />
-            <circle class="oc-star" cx="950" cy="320" r="1.8" fill="#FFD66B" />
-            <circle class="oc-star oc-star-center" cx="950" cy="250" r="5" fill="#FFE08A" />
+          <!-- pedestal lower body -->
+          <polygon points="760,250 1040,250 1050,310 750,310" fill="#161c2a" stroke="#2a3142" stroke-width="1" />
+          <!-- price plate on pedestal lower body -->
+          <rect x="810" y="262" width="180" height="28" rx="4" fill="#0a0d14" stroke="#FFB800" stroke-width="1" opacity="0.95" />
+          <text x="900" y="280" text-anchor="middle" fill="#FFB800" font-family="Inter Tight" font-size="13" letter-spacing="2.2" font-weight="700" class="offer-take">→ TAKE ONE</text>
+
+          <!-- pixel character standing next to the kiosk, pointing up at the billboard -->
+          <g transform="translate(1075 240) scale(1.5)">
+            <g class="pixel-char char-offer">
+              <!-- head -->
+              <rect x="0" y="0" width="16" height="16" fill="#e8c39e" />
+              <rect x="2" y="2" width="12" height="2" fill="#3a2e1f" />
+              <rect x="4" y="6" width="2" height="2" fill="#1a0f08" />
+              <rect x="10" y="6" width="2" height="2" fill="#1a0f08" />
+              <rect x="6" y="11" width="4" height="1" fill="#a05530" class="mouth-talk" style="animation-delay:0.4s" />
+              <!-- shirt purple -->
+              <rect x="-2" y="16" width="20" height="14" fill="#A855F7" />
+              <rect x="-2" y="16" width="20" height="2" fill="#7c3aed" />
+              <!-- arm pointing up at billboard (gesture) -->
+              <rect class="offer-arm" x="-6" y="14" width="6" height="3" fill="#A855F7" />
+              <rect class="offer-arm" x="-8" y="10" width="3" height="6" fill="#e8c39e" />
+            </g>
           </g>
-        </g>
         </g>
 
         <!-- ============================ -->
@@ -521,17 +478,17 @@
       <div class="stack-item" style="--rot-delay:4.2s">
         <div class="stack-card">
           <span class="stack-name">Expo + React Native</span>
-          <span class="stack-note" data-formal="Mobile (Outtcast)." data-real="For the thing Im actually building.">For the thing Im actually building.</span>
+          <span class="stack-note" data-formal="Mobile development." data-real="For the side project I keep poking at after hours.">For the side project I keep poking at after hours.</span>
         </div>
         <div class="stack-card">
           <span class="stack-name">iOS / TestFlight</span>
-          <span class="stack-note" data-formal="Distribution channel." data-real="Where Outtcast goes next.">Where Outtcast goes next.</span>
+          <span class="stack-note" data-formal="Distribution channel." data-real="How the mobile stuff actually gets into hands.">How the mobile stuff actually gets into hands.</span>
         </div>
       </div>
       <div class="stack-item" style="--rot-delay:4.9s">
         <div class="stack-card">
           <span class="stack-name">Supabase</span>
-          <span class="stack-note" data-formal="Backend (Outtcast)." data-real="Postgres + auth + storage. Boring on purpose.">Postgres + auth + storage. Boring on purpose.</span>
+          <span class="stack-note" data-formal="Backend-as-a-service." data-real="Postgres + auth + storage. Boring on purpose.">Postgres + auth + storage. Boring on purpose.</span>
         </div>
         <div class="stack-card">
           <span class="stack-name">Postgres</span>
@@ -561,7 +518,7 @@
     </div>
   </section>
 
-  <!-- about / outtcast -->
+  <!-- about -->
   <section class="about" id="about">
     <div class="section-label">about</div>
     <div class="about-grid">

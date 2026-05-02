@@ -255,37 +255,6 @@
         }
       ],
       stack: ["GoHighLevel", "Custom HTML/CSS", "Merge Tag Architecture", "Conditional Rendering", "Multi-tenant Replication"]
-    },
-
-    outtcast: {
-      eyebrow: "THE VISION · in development",
-      title: { formal: "The vision.", real: "The vision." },
-      tagline: { formal: "Mobile, social, in development.", real: "Built nights and weekends." },
-      wow: { type: "mine", accent: "#A855F7" },
-      build: [
-        {
-          label: "what its about",
-          body: {
-            formal: "A place where people working on themselves find each other and stop disappearing.",
-            real: "A place where the people grinding alone find each other. Your light only stays lit because someone elses is."
-          }
-        },
-        {
-          label: "where it is",
-          body: {
-            formal: "MVP complete. TestFlight rollout next.",
-            real: "MVP done. TestFlight soon."
-          }
-        },
-        {
-          label: "why",
-          body: {
-            formal: "Most people start. Few finish. The thing that closes that gap is usually other people.",
-            real: "Most people start. Few finish. The thing that closes that gap is almost always other people."
-          }
-        }
-      ],
-      stack: ["Expo", "React Native", "Supabase", "Postgres", "iOS"]
     }
   };
 
@@ -473,58 +442,11 @@
       </div>`;
   }
 
-  function wowMine(w, key) {
-    // OUTTCAST: village board. waitlist + scrolling commitments.
-    const seed = [
-      { name: "Marcus T.",  what: "training for boston",                 day: 87  },
-      { name: "Sarah K.",   what: "writing the novel",                   day: 47  },
-      { name: "Jason R.",   what: "quit drinking. day at a time.",       day: 312 },
-      { name: "Maya H.",    what: "shipping the indie game",             day: 156 },
-      { name: "Devon P.",   what: "rebuilding after the divorce",        day: 94  },
-      { name: "Aisha B.",   what: "med school grind",                    day: 228 },
-      { name: "Ben C.",     what: "cold morning runs",                   day: 23  },
-      { name: "Rae S.",     what: "saving for the down payment",         day: 134 },
-      { name: "Tomas G.",   what: "building outtcast",                   day: 312 },
-      { name: "Liv M.",     what: "no phone before 9am",                 day: 41  },
-      { name: "Chris W.",   what: "back to playing piano",               day: 71  },
-      { name: "Emma D.",    what: "reading 30 mins a day",               day: 18  },
-      { name: "Jordan H.",  what: "sober, working out, showing up",      day: 412 },
-      { name: "Wesley A.",  what: "calling my dad every sunday",         day: 9   },
-      { name: "Priya N.",   what: "ten miles next month",                day: 56  }
-    ];
-    const rows = seed.map(e => `
-      <div class="board-row">
-        <span class="board-name">${e.name}</span>
-        <span class="board-sep">/</span>
-        <span class="board-what">${e.what}</span>
-        <span class="board-sep">/</span>
-        <span class="board-day">day ${e.day}</span>
-      </div>`).join("");
-    return `
-      <div class="wow wow-board" data-wow="${key}" style="--accent:${w.accent}">
-        <div class="wow-frame">
-          <div class="wow-frame-bar">
-            <span class="wow-frame-dot"></span>
-            <span class="wow-frame-label">the village board</span>
-            <span class="board-counter"><span class="board-counter-n">247</span><span class="board-counter-tail">&nbsp;on the board</span></span>
-          </div>
-          <div class="board-feed">${rows}</div>
-          <form class="board-form" autocomplete="off">
-            <input class="board-input board-input-what" placeholder="what are you working on?" maxlength="60" required />
-            <input class="board-input board-input-email" placeholder="email (optional)" type="email" />
-            <button class="board-submit" type="submit">add me</button>
-          </form>
-          <div class="board-status" aria-live="polite"></div>
-        </div>
-      </div>`;
-  }
-
   const wowRenderers = {
     "sms-thread": wowSmsThread,
     "voice-call": wowVoiceCall,
     "eval-grid": wowEvalGrid,
-    "lead-flow": wowLeadFlow,
-    "mine": wowMine
+    "lead-flow": wowLeadFlow
   };
 
   // -------- case study overlay --------
@@ -686,70 +608,6 @@
     activeTimers.push(id);
   }
 
-  // -------- outtcast board cycle (waitlist auto-incoming) --------
-  function startBoardCycle(container) {
-    if (!container) return;
-    const feed = container.querySelector(".board-feed");
-    const counterN = container.querySelector(".board-counter-n");
-    const form = container.querySelector(".board-form");
-    const whatInput = container.querySelector(".board-input-what");
-    const emailInput = container.querySelector(".board-input-email");
-    const status = container.querySelector(".board-status");
-    if (!feed || !counterN) return;
-    const incoming = [
-      { name: "Carter B.",  what: "first marathon" },
-      { name: "Nia O.",     what: "100 cold pitches this month" },
-      { name: "Eli M.",     what: "weights five days a week" },
-      { name: "Lin Z.",     what: "back to therapy" },
-      { name: "Reggie F.",  what: "saving 30% of every paycheck" },
-      { name: "Ana V.",     what: "no junk food for 90 days" },
-      { name: "Kofi A.",    what: "shipping the etsy shop" },
-      { name: "Hana Y.",    what: "morning pages, every day" },
-      { name: "Sam R.",     what: "running my first 5k" },
-      { name: "Mira K.",    what: "draft 1 of the screenplay" },
-      { name: "Theo J.",    what: "showing up to the gym" },
-      { name: "Quinn L.",   what: "8 hours of sleep, no excuses" }
-    ];
-    let counter = 247;
-    let idx = 0;
-    function pushNew(name, what, dayOverride) {
-      if (!feed) return;
-      const day = dayOverride != null ? dayOverride : (1 + Math.floor(Math.random() * 5));
-      const row = document.createElement("div");
-      row.className = "board-row board-row-new";
-      const safe = (s) => String(s).replace(/[<>&]/g, c => ({ "<":"&lt;", ">":"&gt;", "&":"&amp;" }[c]));
-      row.innerHTML =
-        `<span class="board-name">${safe(name)}</span>` +
-        `<span class="board-sep">/</span>` +
-        `<span class="board-what">${safe(what)}</span>` +
-        `<span class="board-sep">/</span>` +
-        `<span class="board-day">day ${day}</span>`;
-      feed.prepend(row);
-      counter += 1;
-      counterN.textContent = counter.toLocaleString();
-      // trim feed if it gets huge
-      while (feed.children.length > 40) feed.removeChild(feed.lastChild);
-    }
-    const id = setInterval(() => {
-      if (!container.isConnected) return;
-      const e = incoming[idx % incoming.length];
-      idx += 1;
-      pushNew(e.name, e.what);
-    }, 5500);
-    activeTimers.push(id);
-    if (form && whatInput) {
-      form.addEventListener("submit", (ev) => {
-        ev.preventDefault();
-        const what = whatInput.value.trim();
-        if (!what) return;
-        pushNew("you", what, 1);
-        if (status) status.textContent = "youre on the board.";
-        whatInput.value = "";
-        if (emailInput) emailInput.value = "";
-      });
-    }
-  }
-
   function renderCase(key) {
     const c = cases[key];
     if (!c) return;
@@ -808,10 +666,6 @@
     // start backend ops cycle (control room ticker)
     const ops = overlayContent.querySelector(".wow-ops");
     if (ops) startOpsCycle(ops);
-
-    // start outtcast board cycle (waitlist auto-incoming)
-    const board = overlayContent.querySelector(".wow-board");
-    if (board) startBoardCycle(board);
   }
 
   function closeCase() {
@@ -852,20 +706,7 @@
     }
   });
 
-  let buf = "";
-  document.addEventListener("keydown", (e) => {
-    if (e.target.matches("input, textarea")) return;
-    if (e.key.length === 1) {
-      buf = (buf + e.key.toLowerCase()).slice(-12);
-      if (buf.endsWith("outtcast")) {
-        buf = "";
-        renderCase("outtcast");
-      }
-    }
-  });
-
   console.log("%c thomasgoggin.com ", "background:#FFB800;color:#0a0d14;padding:6px 10px;font-family:monospace;font-weight:bold;font-size:12px");
   console.log("%c built late at night, in one sitting, on purpose. ", "color:#8a93a8;font-family:monospace;font-size:11px");
-  console.log("%c ↓ try typing 'outtcast' anywhere on the page ↓ ", "color:#A855F7;font-family:monospace;font-size:11px");
-  console.log("%c ↓ or press 'V' to flip the voice ↓ ", "color:#FFB800;font-family:monospace;font-size:11px");
+  console.log("%c ↓ press 'V' to flip the voice ↓ ", "color:#FFB800;font-family:monospace;font-size:11px");
 })();
