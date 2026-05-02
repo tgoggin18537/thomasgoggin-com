@@ -218,39 +218,133 @@
       display: block; color: var(--muted); font-size: 13px; margin-top: 4px;
     }
 
-    /* demo block */
-    .sb-demo {
-      margin-top: 48px; padding: 48px;
-      border: 1px solid var(--amber); border-radius: 12px;
-      background: linear-gradient(180deg, rgba(255, 184, 0, 0.05), rgba(255, 184, 0, 0.01));
-      text-align: center; position: relative; overflow: hidden;
+    /* in-page chat demo */
+    .sb-chat {
+      margin-top: 48px;
+      border: 1px solid var(--amber); border-radius: 14px;
+      background: linear-gradient(180deg, rgba(255, 184, 0, 0.04), rgba(255, 184, 0, 0.01));
+      position: relative; overflow: hidden;
+      max-width: 620px; margin-left: auto; margin-right: auto;
     }
-    .sb-demo::before {
+    .sb-chat::before {
       content: ""; position: absolute; inset: -1px;
-      border-radius: 12px; pointer-events: none;
-      background: radial-gradient(circle at 50% 0%, rgba(255, 184, 0, 0.18), transparent 60%);
+      border-radius: 14px; pointer-events: none;
+      background: radial-gradient(circle at 50% 0%, rgba(255, 184, 0, 0.14), transparent 60%);
       z-index: 0;
     }
-    .sb-demo > * { position: relative; z-index: 1; }
-    .sb-demo .label {
-      font-family: var(--mono); font-size: 11px; letter-spacing: 0.22em; color: var(--amber);
-      margin-bottom: 18px;
+    .sb-chat-head {
+      position: relative; z-index: 1;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 16px; padding: 16px 20px;
+      border-bottom: 1px solid rgba(255, 184, 0, 0.18);
     }
-    .sb-demo .number {
-      font-family: var(--serif); font-style: italic; font-weight: 400;
-      font-size: clamp(36px, 5vw, 56px); color: var(--text); margin-bottom: 14px;
+    .sb-chat-id {
+      display: flex; align-items: center; gap: 12px;
     }
-    .sb-demo .hint { color: var(--muted); font-size: 15px; line-height: 1.5; max-width: 540px; margin: 0 auto 24px; }
-    .sb-demo .pending {
-      display: inline-block; padding: 6px 14px; border-radius: 999px;
-      background: rgba(168, 85, 247, 0.12); border: 1px solid rgba(168, 85, 247, 0.4);
-      color: var(--purple); font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em;
-      margin-bottom: 20px;
+    .sb-chat-avatar {
+      width: 34px; height: 34px; border-radius: 50%;
+      background: var(--amber); color: #0a0d14;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--mono); font-weight: 700; font-size: 13px;
+      letter-spacing: 0.04em;
     }
-    .sb-demo .alt {
-      margin-top: 20px; font-size: 14px; color: var(--muted-2);
+    .sb-chat-name { color: var(--text); font-family: var(--sans); font-weight: 500; font-size: 15px; line-height: 1.2; }
+    .sb-chat-sub { color: var(--muted-2); font-family: var(--mono); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; }
+    .sb-chat-reset {
+      background: transparent; border: 1px solid rgba(255,184,0,0.4);
+      color: var(--muted); font-family: var(--mono); font-size: 10px;
+      letter-spacing: 0.16em; padding: 6px 12px; border-radius: 999px;
+      cursor: pointer; transition: color 0.2s, border-color 0.2s;
     }
-    .sb-demo .alt a { color: var(--amber); text-decoration: underline; text-underline-offset: 4px; }
+    .sb-chat-reset:hover { color: var(--amber); border-color: var(--amber); }
+    .sb-chat-log {
+      position: relative; z-index: 1;
+      padding: 22px 20px; min-height: 320px; max-height: 460px;
+      overflow-y: auto;
+      display: flex; flex-direction: column; gap: 10px;
+      scroll-behavior: smooth;
+    }
+    .sb-chat-log::-webkit-scrollbar { width: 8px; }
+    .sb-chat-log::-webkit-scrollbar-thumb { background: rgba(255, 184, 0, 0.3); border-radius: 4px; }
+    .sb-bubble {
+      max-width: 78%; padding: 10px 14px; border-radius: 16px;
+      font-size: 15px; line-height: 1.45;
+      word-wrap: break-word; overflow-wrap: break-word;
+      animation: sb-bubble-in 0.18s ease-out;
+    }
+    @keyframes sb-bubble-in {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .sb-bubble.them {
+      align-self: flex-start;
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--text);
+      border-bottom-left-radius: 4px;
+    }
+    .sb-bubble.you {
+      align-self: flex-end;
+      background: var(--amber); color: #0a0d14;
+      border-bottom-right-radius: 4px;
+    }
+    .sb-bubble a { color: inherit; text-decoration: underline; }
+    .sb-typing {
+      align-self: flex-start;
+      display: inline-flex; gap: 4px;
+      padding: 12px 14px; border-radius: 16px;
+      background: rgba(255, 255, 255, 0.06);
+      border-bottom-left-radius: 4px;
+    }
+    .sb-typing span {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--muted);
+      animation: sb-typing 1.2s infinite;
+    }
+    .sb-typing span:nth-child(2) { animation-delay: 0.2s; }
+    .sb-typing span:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes sb-typing {
+      0%, 60%, 100% { opacity: 0.3; transform: translateY(0); }
+      30% { opacity: 1; transform: translateY(-2px); }
+    }
+    .sb-chat-input {
+      position: relative; z-index: 1;
+      display: flex; gap: 10px; padding: 14px 16px;
+      border-top: 1px solid rgba(255, 184, 0, 0.18);
+      background: rgba(0, 0, 0, 0.2);
+    }
+    .sb-chat-input input {
+      flex: 1; padding: 12px 14px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 999px;
+      color: var(--text); font-size: 15px; font-family: var(--sans);
+      outline: none; transition: border-color 0.2s;
+    }
+    .sb-chat-input input:focus { border-color: var(--amber); }
+    .sb-chat-input input::placeholder { color: var(--muted-2); }
+    .sb-chat-input input:disabled { opacity: 0.5; }
+    .sb-chat-send {
+      padding: 0 20px;
+      background: var(--amber); color: #0a0d14;
+      border: 0; border-radius: 999px;
+      font-family: var(--mono); font-size: 12px; letter-spacing: 0.14em;
+      cursor: pointer; transition: background 0.2s, opacity 0.2s;
+    }
+    .sb-chat-send:hover { background: var(--amber-soft); }
+    .sb-chat-send:disabled { opacity: 0.4; cursor: default; }
+    .sb-chat-foot {
+      text-align: center; margin-top: 18px;
+      color: var(--muted-2); font-size: 13px;
+    }
+    .sb-chat-foot a { color: var(--amber); text-decoration: underline; text-underline-offset: 4px; }
+    .sb-chat-error {
+      align-self: center;
+      padding: 8px 14px; border-radius: 8px;
+      background: rgba(168, 85, 247, 0.1);
+      border: 1px solid rgba(168, 85, 247, 0.35);
+      color: var(--purple); font-family: var(--mono); font-size: 11px;
+      letter-spacing: 0.08em;
+    }
 
     /* pricing card */
     .sb-price {
@@ -607,18 +701,37 @@
         <span data-formal="The fastest way to evaluate this offer is to talk to the demo. It's voice-matched to me, sells a hypothetical product, and reveals itself if you ask if it's a bot." data-real="Honestly the fastest way to know if this works is to just text the demo and try to break it, its voice-matched to me selling a fake product, and itll come clean and admit its a bot if you ask">Honestly the fastest way to know if this works is to just text the demo and try to break it, its voice-matched to me selling a fake product, and itll come clean and admit its a bot if you ask</span>
       </p>
 
-      <div class="sb-demo">
-        <div class="pending"><span data-formal="LIVE DEMO COMING MAY 25" data-real="LIVE DEMO COMING MAY 25 · A2P PENDING">LIVE DEMO COMING MAY 25 · A2P PENDING</span></div>
-        <div class="label"><span data-formal="DEMO NUMBER" data-real="TEXT THIS NUMBER">TEXT THIS NUMBER</span></div>
-        <div class="number" id="demoNumber">+1 (843) ___-____</div>
-        <p class="hint">
-          <span data-formal="The number is provisioned and the bot is built. Live for public texting once carrier registration completes (May 22-25 estimated)." data-real="Bot is built and the number is locked, but carriers gate SMS on every new number for like 3 weeks of registration BS, so once it clears this number goes live and youll be able to text it and see a real conversation happen">Bot is built and the number is locked, but carriers gate SMS on every new number for like 3 weeks of registration BS, so once it clears this number goes live and youll be able to text it and see a real conversation happen</span>
-        </p>
-        <p class="alt">
-          <span data-formal="Want a private demo before then? " data-real="Cant wait? ">Cant wait? </span>
-          <a href="mailto:thomas@thomasgoggin.com?subject=Ghostwriter%20demo%20request"><span data-formal="Email me for a screen-recorded demo." data-real="Email me, Ill send a 90-second video.">Email me, Ill send a 90-second video.</span></a>
-        </p>
+      <div class="sb-chat" id="sbChat" aria-live="polite">
+        <div class="sb-chat-head">
+          <div class="sb-chat-id">
+            <div class="sb-chat-avatar" aria-hidden="true">J</div>
+            <div>
+              <div class="sb-chat-name">Jordan</div>
+              <div class="sb-chat-sub">Goggin Studio · SDR</div>
+            </div>
+          </div>
+          <button type="button" class="sb-chat-reset" id="sbChatReset" title="Restart the conversation">RESTART</button>
+        </div>
+        <div class="sb-chat-log" id="sbChatLog" role="log" aria-label="Conversation with Jordan"></div>
+        <form class="sb-chat-input" id="sbChatForm" autocomplete="off">
+          <label for="sbChatField" class="sb-visually-hidden" style="position:absolute;left:-9999px;">Message Jordan</label>
+          <input
+            type="text"
+            id="sbChatField"
+            placeholder="type a message..."
+            maxlength="600"
+            autocomplete="off"
+            spellcheck="true"
+            required
+          />
+          <button type="submit" class="sb-chat-send" id="sbChatSend">SEND</button>
+        </form>
       </div>
+      <p class="sb-chat-foot">
+        <span data-formal="No phone number required. Voice-matched, reveals itself if you ask if it's a bot, hands off to my calendar after the reveal." data-real="No phone number, no email, just a chat box. Try to break it, ask if its a bot, see what happens">No phone number, no email, just a chat box. Try to break it, ask if its a bot, see what happens</span>
+        ·
+        <a href="mailto:thomas@thomasgoggin.com?subject=Ghostwriter%20demo%20request"><span data-formal="Want it in your stack? Email me." data-real="Want one for your business? Email me">Want one for your business? Email me</span></a>
+      </p>
     </section>
 
     <!-- PRICING -->
@@ -838,6 +951,226 @@
           if (e.target.closest(hoverables)) cursorRing.classList.remove("hover");
         });
       }
+
+      // ---- in-page chat demo ----
+      // Talks to the Ghostwriter worker. Stateless on the server: history
+      // and a small state object live in localStorage on this page. Reset
+      // wipes both. The worker enforces CORS + per-IP rate limit.
+      //
+      // FILL: set CHAT_API_URL to the deployed worker URL. Default is the
+      // workers.dev subdomain you'll get from `wrangler deploy`. Once you
+      // bind a custom route (e.g. chat.thomasgoggin.com) update this.
+      const CHAT_API_URL = "https://setter-demo-bot.thomasgoggin.workers.dev/chat";
+      const CHAT_STORAGE_KEY = "tg-ghostwriter-chat-v1";
+      const CHAT_HISTORY_LIMIT = 30;
+
+      const chatLog = document.getElementById("sbChatLog");
+      const chatForm = document.getElementById("sbChatForm");
+      const chatField = document.getElementById("sbChatField");
+      const chatSend = document.getElementById("sbChatSend");
+      const chatReset = document.getElementById("sbChatReset");
+
+      function loadChatState() {
+        try {
+          const raw = localStorage.getItem(CHAT_STORAGE_KEY);
+          if (!raw) return null;
+          const parsed = JSON.parse(raw);
+          if (!parsed || !Array.isArray(parsed.history)) return null;
+          return parsed;
+        } catch (_) { return null; }
+      }
+
+      function saveChatState(s) {
+        try { localStorage.setItem(CHAT_STORAGE_KEY, JSON.stringify(s)); } catch (_) {}
+      }
+
+      function clearChatState() {
+        try { localStorage.removeItem(CHAT_STORAGE_KEY); } catch (_) {}
+      }
+
+      // Tiny linkifier. Wraps bare https://... URLs as <a> so the Cal link
+      // in the reveal is clickable. Escapes HTML first (defense in depth,
+      // even though message content is generated server-side).
+      function escapeHtml(s) {
+        return s.replace(/[&<>"']/g, (c) => ({
+          "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;",
+        })[c]);
+      }
+      function linkify(s) {
+        const escaped = escapeHtml(s);
+        return escaped.replace(
+          /(https?:\/\/[^\s<]+)/g,
+          (url) => `<a href="${url}" target="_blank" rel="noopener noreferrer">${url}</a>`,
+        );
+      }
+
+      function appendBubble(role, content, opts) {
+        if (!chatLog) return;
+        const div = document.createElement("div");
+        div.className = "sb-bubble " + (role === "user" ? "you" : "them");
+        div.innerHTML = linkify(content);
+        chatLog.appendChild(div);
+        if (!opts || !opts.skipScroll) chatLog.scrollTop = chatLog.scrollHeight;
+      }
+
+      function appendError(text) {
+        if (!chatLog) return;
+        const div = document.createElement("div");
+        div.className = "sb-chat-error";
+        div.textContent = text;
+        chatLog.appendChild(div);
+        chatLog.scrollTop = chatLog.scrollHeight;
+      }
+
+      function showTyping() {
+        if (!chatLog) return null;
+        const div = document.createElement("div");
+        div.className = "sb-typing";
+        div.innerHTML = "<span></span><span></span><span></span>";
+        chatLog.appendChild(div);
+        chatLog.scrollTop = chatLog.scrollHeight;
+        return div;
+      }
+
+      let chatHistory = [];
+      let chatBotState = {};
+      let chatEnded = false;
+
+      function renderHistory() {
+        if (!chatLog) return;
+        chatLog.innerHTML = "";
+        for (const m of chatHistory) {
+          appendBubble(m.role, m.content, { skipScroll: true });
+        }
+        chatLog.scrollTop = chatLog.scrollHeight;
+      }
+
+      function setEnded(ended) {
+        chatEnded = ended;
+        if (chatField) chatField.disabled = ended;
+        if (chatSend) chatSend.disabled = ended;
+        if (chatField && !ended) chatField.placeholder = "type a message...";
+        if (chatField && ended) chatField.placeholder = "convo wrapped, restart to try again";
+      }
+
+      async function sendToBot(message) {
+        if (!CHAT_API_URL || CHAT_API_URL.includes("REPLACE")) {
+          appendError("chat API not configured yet. email thomas@thomasgoggin.com");
+          return;
+        }
+        const typing = showTyping();
+        chatField.disabled = true;
+        chatSend.disabled = true;
+        try {
+          const res = await fetch(CHAT_API_URL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              message,
+              history: chatHistory.slice(-CHAT_HISTORY_LIMIT),
+              state: chatBotState,
+            }),
+          });
+          if (typing && typing.parentNode) typing.parentNode.removeChild(typing);
+          if (!res.ok) {
+            const j = await res.json().catch(() => ({}));
+            if (res.status === 429) {
+              appendError("hit the rate limit, give it a minute");
+            } else if (j && j.error) {
+              appendError("hiccup: " + j.error);
+            } else {
+              appendError("network hiccup, try again");
+            }
+            return;
+          }
+          const data = await res.json();
+          if (!data.ok || !data.reply) {
+            appendError("the bot couldnt land a reply that turn, try rephrasing");
+            return;
+          }
+          chatHistory.push({ role: "assistant", content: data.reply });
+          appendBubble("assistant", data.reply);
+          chatBotState = data.state || chatBotState;
+          if (data.ended) setEnded(true);
+          saveChatState({ history: chatHistory, state: chatBotState, ended: chatEnded });
+        } catch (err) {
+          if (typing && typing.parentNode) typing.parentNode.removeChild(typing);
+          console.error("[chat] fetch error", err);
+          appendError("couldnt reach the bot, try again in a sec");
+        } finally {
+          if (!chatEnded) {
+            chatField.disabled = false;
+            chatSend.disabled = false;
+            chatField.focus();
+          }
+        }
+      }
+
+      // First-load: hydrate from localStorage OR fetch the opener.
+      async function bootstrapChat() {
+        const saved = loadChatState();
+        if (saved && saved.history && saved.history.length > 0) {
+          chatHistory = saved.history;
+          chatBotState = saved.state || {};
+          chatEnded = !!saved.ended;
+          renderHistory();
+          setEnded(chatEnded);
+          return;
+        }
+        // No prior session. Ask the worker for the opener.
+        if (!CHAT_API_URL || CHAT_API_URL.includes("REPLACE")) {
+          appendBubble("assistant", "yo, jordan from goggin studio. youre on the ghostwriter page so im guessing you wanna see what this thing is like. quick q, what kinda business you running?");
+          return;
+        }
+        const typing = showTyping();
+        try {
+          const res = await fetch(CHAT_API_URL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ message: "__START__", history: [], state: {} }),
+          });
+          if (typing && typing.parentNode) typing.parentNode.removeChild(typing);
+          if (res.ok) {
+            const data = await res.json();
+            if (data.ok && data.reply) {
+              chatHistory.push({ role: "assistant", content: data.reply });
+              chatBotState = data.state || {};
+              appendBubble("assistant", data.reply);
+              saveChatState({ history: chatHistory, state: chatBotState, ended: false });
+              return;
+            }
+          }
+          appendBubble("assistant", "yo, jordan from goggin studio. youre on the ghostwriter page so im guessing you wanna see what this thing is like. quick q, what kinda business you running?");
+        } catch (err) {
+          if (typing && typing.parentNode) typing.parentNode.removeChild(typing);
+          appendBubble("assistant", "yo, jordan from goggin studio. youre on the ghostwriter page so im guessing you wanna see what this thing is like. quick q, what kinda business you running?");
+        }
+      }
+
+      chatForm?.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        if (chatEnded) return;
+        const msg = chatField.value.trim();
+        if (!msg) return;
+        chatField.value = "";
+        chatHistory.push({ role: "user", content: msg });
+        appendBubble("user", msg);
+        saveChatState({ history: chatHistory, state: chatBotState, ended: chatEnded });
+        await sendToBot(msg);
+      });
+
+      chatReset?.addEventListener("click", async () => {
+        clearChatState();
+        chatHistory = [];
+        chatBotState = {};
+        setEnded(false);
+        if (chatLog) chatLog.innerHTML = "";
+        if (chatField) { chatField.value = ""; chatField.disabled = false; }
+        if (chatSend) chatSend.disabled = false;
+        await bootstrapChat();
+      });
+
+      bootstrapChat();
 
       console.log("%c thomasgoggin.com / ghostwriter ", "background:#FFB800;color:#0a0d14;padding:6px 10px;font-family:monospace;font-weight:bold;font-size:12px");
       console.log("%c the offer page. press V to flip the voice. ", "color:#8a93a8;font-family:monospace;font-size:11px");
