@@ -681,7 +681,7 @@
     el.addEventListener("click", () => {
       const key = el.dataset.station;
       if (!key) return;
-      if (key === "offer") { window.location.href = "/setter-bot"; return; }
+      if (key === "offer") { window.location.href = "/ghostwriter"; return; }
       renderCase(key);
     });
     el.addEventListener("keydown", (e) => {
@@ -689,7 +689,7 @@
         e.preventDefault();
         const key = el.dataset.station;
         if (!key) return;
-        if (key === "offer") { window.location.href = "/setter-bot"; return; }
+        if (key === "offer") { window.location.href = "/ghostwriter"; return; }
         renderCase(key);
       }
     });

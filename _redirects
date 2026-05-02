@@ -1,0 +1,4 @@
+# cloudflare pages redirects
+# old setter-bot URL → new ghostwriter brand
+/setter-bot   /ghostwriter   301
+/setter-bot/  /ghostwriter   301
