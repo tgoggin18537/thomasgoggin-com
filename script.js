@@ -826,13 +826,17 @@
   document.querySelectorAll(".station").forEach((el) => {
     el.addEventListener("click", () => {
       const key = el.dataset.station;
-      if (key) renderCase(key);
+      if (!key) return;
+      if (key === "offer") { window.location.href = "/setter-bot"; return; }
+      renderCase(key);
     });
     el.addEventListener("keydown", (e) => {
       if (e.key === "Enter" || e.key === " ") {
         e.preventDefault();
         const key = el.dataset.station;
-        if (key) renderCase(key);
+        if (!key) return;
+        if (key === "offer") { window.location.href = "/setter-bot"; return; }
+        renderCase(key);
       }
     });
   });

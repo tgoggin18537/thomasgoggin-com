@@ -30,6 +30,7 @@
       <li><a href="#approach">approach</a></li>
       <li><a href="#stack">stack</a></li>
       <li><a href="#contact">contact</a></li>
+      <li><a href="/setter-bot" class="nav-cta">setter bot <span class="nav-cta-arrow">→</span></a></li>
     </ul>
   </nav>
 
@@ -113,6 +114,35 @@
         <!-- back wall hint -->
         <polygon points="200,200 1100,200 1100,80 200,80" fill="#0a0d14" opacity="0.6" />
         <polygon points="200,200 200,80 100,140 100,650 200,650" fill="#080a10" opacity="0.4" />
+
+        <!-- ============================ -->
+        <!-- PRODUCTIZED OFFER (hanging neon billboard, back-center) -->
+        <!-- ============================ -->
+        <g class="station station-offer" data-station="offer" tabindex="0" role="button" aria-label="Open the productized Setter Bot offer">
+          <!-- generous click target -->
+          <rect class="station-hit" x="660" y="78" width="240" height="120" fill="transparent" />
+          <!-- glow halo behind the sign -->
+          <ellipse cx="780" cy="138" rx="150" ry="55" fill="url(#purple-glow)" class="station-glow" opacity="0.85" />
+          <!-- hanging chains -->
+          <line x1="700" y1="80" x2="700" y2="100" stroke="#2a3142" stroke-width="1" />
+          <line x1="860" y1="80" x2="860" y2="100" stroke="#2a3142" stroke-width="1" />
+          <!-- sign body -->
+          <rect x="680" y="100" width="200" height="80" rx="6" fill="#0a0d14" stroke="#A855F7" stroke-width="2" class="offer-frame" />
+          <rect x="684" y="104" width="192" height="72" rx="4" fill="none" stroke="#FFB800" stroke-width="0.5" opacity="0.45" />
+          <!-- corner LEDs -->
+          <circle cx="690" cy="110" r="1.4" fill="#A855F7" class="offer-led" />
+          <circle cx="870" cy="110" r="1.4" fill="#A855F7" class="offer-led" style="animation-delay:0.7s" />
+          <circle cx="690" cy="170" r="1.4" fill="#A855F7" class="offer-led" style="animation-delay:1.4s" />
+          <circle cx="870" cy="170" r="1.4" fill="#A855F7" class="offer-led" style="animation-delay:2.1s" />
+          <!-- eyebrow -->
+          <text x="780" y="123" text-anchor="middle" fill="#A855F7" font-family="JetBrains Mono" font-size="9" letter-spacing="2.4" font-weight="600">NOW SHIPPING</text>
+          <!-- divider -->
+          <line x1="710" y1="130" x2="850" y2="130" stroke="#1f2737" stroke-width="0.5" />
+          <!-- main label -->
+          <text x="780" y="153" text-anchor="middle" fill="#FFB800" font-family="Inter Tight" font-size="20" letter-spacing="2.6" font-weight="700" class="offer-flicker">SETTER BOT</text>
+          <!-- price + cta -->
+          <text x="780" y="170" text-anchor="middle" fill="#9CA3AF" font-family="JetBrains Mono" font-size="8" letter-spacing="1.2">$3,500 + $1,200/mo · TAKE ONE →</text>
+        </g>
 
         <!-- ============================ -->
         <!-- mine: little star scene, back-right (no walls, autoplay) -->
