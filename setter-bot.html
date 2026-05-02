@@ -1,0 +1,847 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Setter Bot · texts your leads in your voice, books calls 24/7</title>
+  <meta name="description" content="A voice-matched SMS bot that replies to every paid lead in under 30 seconds, in your voice, and books qualified calls on your calendar. $3,500 setup, $1,200/mo." />
+  <meta property="og:title" content="Setter Bot · the bot that closes leads while you sleep" />
+  <meta property="og:description" content="Voice-matched SMS sales bot. Replies in <30s, books calls 24/7, sounds exactly like you. $3,500 setup, $1,200/mo." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://thomasgoggin.com/setter-bot" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* =========================================
+       setter-bot.html / page-specific
+       ========================================= */
+    .sb-page { position: relative; z-index: 2; padding-top: 88px; }
+
+    /* simplified nav for offer page, back-to-home only */
+    .sb-nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 22px 36px;
+      font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em;
+      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+      background: rgba(7, 9, 15, 0.5);
+      border-bottom: 1px solid rgba(31, 39, 55, 0.4);
+    }
+    .sb-nav .sb-back { color: var(--muted); transition: color 0.2s ease; }
+    .sb-nav .sb-back:hover { color: var(--amber); }
+    .sb-nav .sb-eyebrow { color: var(--muted-2); font-size: 11px; letter-spacing: 0.18em; }
+    .sb-nav .sb-eyebrow .dot {
+      display: inline-block; width: 6px; height: 6px; border-radius: 50%;
+      background: var(--amber); margin-right: 8px; vertical-align: 1px;
+      box-shadow: 0 0 8px rgba(255, 184, 0, 0.7);
+      animation: sb-pulse 2.4s ease-in-out infinite;
+    }
+    @keyframes sb-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+    /* hero */
+    .sb-hero {
+      min-height: calc(100vh - 88px);
+      padding: 80px 8vw 100px;
+      display: flex; flex-direction: column; justify-content: center;
+      max-width: 1280px; margin: 0 auto;
+      position: relative;
+    }
+    .sb-eyebrow-row {
+      font-family: var(--mono); font-size: 11px; letter-spacing: 0.22em;
+      color: var(--muted); margin-bottom: 24px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .sb-eyebrow-row .sep { width: 24px; height: 1px; background: var(--line); }
+    .sb-h1 {
+      font-family: var(--serif); font-weight: 400; font-style: italic;
+      font-size: clamp(48px, 8vw, 104px); line-height: 0.96;
+      letter-spacing: -0.02em; margin-bottom: 28px;
+    }
+    .sb-h1 .accent { color: var(--amber); font-style: normal; font-family: var(--sans); font-weight: 500; }
+    .sb-h1 .strike { color: var(--muted-2); position: relative; }
+    .sb-h1 .strike::after {
+      content: ""; position: absolute; left: 0; right: 0; top: 52%;
+      height: 3px; background: var(--orange); transform: skewY(-1deg);
+    }
+    .sb-sub {
+      font-size: clamp(17px, 1.6vw, 22px); line-height: 1.55;
+      color: var(--muted); max-width: 720px; margin-bottom: 44px;
+    }
+    .sb-sub strong { color: var(--text); font-weight: 500; }
+
+    .sb-cta-row { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
+    .sb-btn {
+      display: inline-flex; align-items: center; gap: 12px;
+      padding: 18px 28px; border-radius: 6px;
+      font-family: var(--sans); font-weight: 600; font-size: 15px;
+      letter-spacing: 0.01em; transition: transform 0.2s ease, box-shadow 0.3s ease, background 0.2s ease;
+    }
+    .sb-btn-primary {
+      background: var(--amber); color: #0a0d14;
+      box-shadow: 0 8px 30px rgba(255, 184, 0, 0.25);
+    }
+    .sb-btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(255, 184, 0, 0.4);
+      background: var(--amber-soft);
+    }
+    .sb-btn-primary .arrow { transition: transform 0.2s ease; }
+    .sb-btn-primary:hover .arrow { transform: translateX(3px); }
+
+    .sb-btn-secondary {
+      background: transparent; color: var(--text);
+      border: 1px solid var(--line);
+    }
+    .sb-btn-secondary:hover { border-color: var(--amber); color: var(--amber); }
+
+    .sb-cta-meta {
+      font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em;
+      color: var(--muted-2); margin-left: 6px;
+    }
+
+    /* stats row */
+    .sb-stats {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 0; max-width: 1280px; margin: 0 auto;
+      padding: 0 8vw 80px;
+      border-top: 1px solid var(--line);
+    }
+    .sb-stat { padding: 32px 24px 24px; border-right: 1px solid var(--line); }
+    .sb-stat:last-child { border-right: 0; }
+    .sb-stat-n {
+      font-family: var(--serif); font-style: italic; font-weight: 400;
+      font-size: clamp(40px, 5vw, 64px); color: var(--amber); line-height: 1; margin-bottom: 12px;
+    }
+    .sb-stat-l { font-family: var(--mono); font-size: 11px; letter-spacing: 0.16em; color: var(--muted); }
+
+    /* generic section */
+    .sb-section { max-width: 1280px; margin: 0 auto; padding: 96px 8vw; position: relative; }
+    .sb-section + .sb-section { border-top: 1px solid rgba(31, 39, 55, 0.5); }
+
+    .sb-section-eyebrow {
+      font-family: var(--mono); font-size: 11px; letter-spacing: 0.22em;
+      color: var(--muted); margin-bottom: 18px;
+    }
+    .sb-section-eyebrow::before {
+      content: ""; display: inline-block; width: 24px; height: 1px;
+      background: var(--amber); margin-right: 12px; vertical-align: 4px;
+    }
+    .sb-section-h {
+      font-family: var(--serif); font-weight: 400; font-style: italic;
+      font-size: clamp(36px, 5vw, 56px); line-height: 1.05;
+      letter-spacing: -0.015em; max-width: 880px; margin-bottom: 32px;
+    }
+    .sb-section-lede {
+      font-size: clamp(16px, 1.4vw, 19px); line-height: 1.6;
+      color: var(--muted); max-width: 700px;
+    }
+
+    /* problem block, big number callout */
+    .sb-problem-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 48px; margin-top: 56px;
+    }
+    .sb-problem-card {
+      padding: 32px; border: 1px solid var(--line); border-radius: 8px;
+      background: linear-gradient(180deg, rgba(17, 21, 31, 0.4), rgba(10, 13, 20, 0.2));
+    }
+    .sb-problem-card .pn {
+      font-family: var(--serif); font-style: italic; font-size: 56px;
+      color: var(--orange); line-height: 1; margin-bottom: 16px;
+    }
+    .sb-problem-card .pl { font-family: var(--mono); font-size: 11px; letter-spacing: 0.18em; color: var(--muted); margin-bottom: 12px; }
+    .sb-problem-card p { color: var(--text); font-size: 16px; line-height: 1.55; }
+    .sb-problem-card .src { font-family: var(--mono); font-size: 10px; color: var(--muted-2); margin-top: 14px; letter-spacing: 0.04em; }
+
+    /* what-it-is, 3 columns */
+    .sb-three-col {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 24px; margin-top: 56px;
+    }
+    .sb-card {
+      padding: 32px 26px; border: 1px solid var(--line); border-radius: 8px;
+      background: rgba(17, 21, 31, 0.35);
+      transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .sb-card:hover {
+      border-color: var(--amber);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(255, 184, 0, 0.08);
+    }
+    .sb-card .ico {
+      font-family: var(--mono); font-size: 11px; color: var(--amber); letter-spacing: 0.15em;
+      margin-bottom: 16px;
+    }
+    .sb-card h3 {
+      font-family: var(--serif); font-style: italic; font-weight: 400;
+      font-size: 26px; line-height: 1.15; margin-bottom: 14px;
+    }
+    .sb-card p { color: var(--muted); font-size: 15px; line-height: 1.55; }
+
+    /* how-it-works steps */
+    .sb-steps { display: flex; flex-direction: column; gap: 0; margin-top: 56px; counter-reset: step; }
+    .sb-step {
+      display: grid; grid-template-columns: 80px 1fr; gap: 28px;
+      padding: 28px 0; border-top: 1px solid var(--line);
+      align-items: start;
+    }
+    .sb-step:last-child { border-bottom: 1px solid var(--line); }
+    .sb-step .n {
+      font-family: var(--serif); font-style: italic; font-size: 44px;
+      color: var(--amber); line-height: 1;
+    }
+    .sb-step h4 {
+      font-family: var(--sans); font-weight: 600; font-size: 19px;
+      margin-bottom: 8px; letter-spacing: -0.005em;
+    }
+    .sb-step p { color: var(--muted); font-size: 15px; line-height: 1.55; max-width: 700px; }
+
+    /* included list */
+    .sb-included {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 16px 36px; margin-top: 48px;
+    }
+    .sb-include-item {
+      display: flex; gap: 14px; align-items: flex-start;
+      padding: 14px 0; border-bottom: 1px solid rgba(31, 39, 55, 0.5);
+    }
+    .sb-include-item .check {
+      flex: 0 0 22px; width: 22px; height: 22px; border-radius: 50%;
+      background: rgba(255, 184, 0, 0.12); border: 1px solid var(--amber);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--amber); font-size: 12px; font-weight: 700; margin-top: 2px;
+    }
+    .sb-include-item .label { font-size: 15px; line-height: 1.5; color: var(--text); }
+    .sb-include-item .label small {
+      display: block; color: var(--muted); font-size: 13px; margin-top: 4px;
+    }
+
+    /* demo block */
+    .sb-demo {
+      margin-top: 48px; padding: 48px;
+      border: 1px solid var(--amber); border-radius: 12px;
+      background: linear-gradient(180deg, rgba(255, 184, 0, 0.05), rgba(255, 184, 0, 0.01));
+      text-align: center; position: relative; overflow: hidden;
+    }
+    .sb-demo::before {
+      content: ""; position: absolute; inset: -1px;
+      border-radius: 12px; pointer-events: none;
+      background: radial-gradient(circle at 50% 0%, rgba(255, 184, 0, 0.18), transparent 60%);
+      z-index: 0;
+    }
+    .sb-demo > * { position: relative; z-index: 1; }
+    .sb-demo .label {
+      font-family: var(--mono); font-size: 11px; letter-spacing: 0.22em; color: var(--amber);
+      margin-bottom: 18px;
+    }
+    .sb-demo .number {
+      font-family: var(--serif); font-style: italic; font-weight: 400;
+      font-size: clamp(36px, 5vw, 56px); color: var(--text); margin-bottom: 14px;
+    }
+    .sb-demo .hint { color: var(--muted); font-size: 15px; line-height: 1.5; max-width: 540px; margin: 0 auto 24px; }
+    .sb-demo .pending {
+      display: inline-block; padding: 6px 14px; border-radius: 999px;
+      background: rgba(168, 85, 247, 0.12); border: 1px solid rgba(168, 85, 247, 0.4);
+      color: var(--purple); font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em;
+      margin-bottom: 20px;
+    }
+    .sb-demo .alt {
+      margin-top: 20px; font-size: 14px; color: var(--muted-2);
+    }
+    .sb-demo .alt a { color: var(--amber); text-decoration: underline; text-underline-offset: 4px; }
+
+    /* pricing card */
+    .sb-price {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 0; margin-top: 56px; border: 1px solid var(--line); border-radius: 12px; overflow: hidden;
+    }
+    .sb-price-side { padding: 44px 38px; }
+    .sb-price-side + .sb-price-side {
+      border-left: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255, 184, 0, 0.03), transparent);
+    }
+    .sb-price-side .lab {
+      font-family: var(--mono); font-size: 11px; letter-spacing: 0.22em; color: var(--muted); margin-bottom: 14px;
+    }
+    .sb-price-side .amt {
+      font-family: var(--serif); font-style: italic; font-size: 64px; line-height: 1;
+      color: var(--text); margin-bottom: 8px;
+    }
+    .sb-price-side .amt .unit { font-family: var(--sans); font-style: normal; font-size: 17px; color: var(--muted); margin-left: 6px; vertical-align: 6px; }
+    .sb-price-side .desc { color: var(--muted); font-size: 15px; line-height: 1.55; margin-bottom: 24px; }
+    .sb-price-side ul { list-style: none; padding: 0; }
+    .sb-price-side li {
+      font-size: 14px; line-height: 1.55; color: var(--text);
+      padding: 8px 0; padding-left: 20px; position: relative;
+    }
+    .sb-price-side li::before {
+      content: "→"; position: absolute; left: 0; color: var(--amber); font-weight: 600;
+    }
+
+    /* fit grid (who it's for / not for) */
+    .sb-fit { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 48px; }
+    .sb-fit-card { padding: 32px; border: 1px solid var(--line); border-radius: 8px; }
+    .sb-fit-card.yes { border-color: rgba(255, 184, 0, 0.4); background: rgba(255, 184, 0, 0.02); }
+    .sb-fit-card.no { border-color: rgba(255, 107, 53, 0.3); background: rgba(255, 107, 53, 0.02); }
+    .sb-fit-card h4 {
+      font-family: var(--mono); font-size: 11px; letter-spacing: 0.2em;
+      margin-bottom: 18px;
+    }
+    .sb-fit-card.yes h4 { color: var(--amber); }
+    .sb-fit-card.no h4 { color: var(--orange); }
+    .sb-fit-card ul { list-style: none; padding: 0; }
+    .sb-fit-card li {
+      font-size: 14px; line-height: 1.55; padding: 8px 0; padding-left: 22px;
+      position: relative; color: var(--text);
+    }
+    .sb-fit-card.yes li::before { content: "✓"; position: absolute; left: 0; color: var(--amber); font-weight: 700; }
+    .sb-fit-card.no li::before { content: "×"; position: absolute; left: 0; color: var(--orange); font-weight: 700; }
+
+    /* faq */
+    .sb-faq { margin-top: 48px; }
+    .sb-q {
+      border-top: 1px solid var(--line);
+      padding: 22px 0;
+      cursor: none;
+    }
+    .sb-q:last-child { border-bottom: 1px solid var(--line); }
+    .sb-q summary {
+      list-style: none; cursor: none;
+      font-family: var(--sans); font-weight: 500; font-size: 17px;
+      display: flex; justify-content: space-between; align-items: center;
+      gap: 24px;
+    }
+    .sb-q summary::-webkit-details-marker { display: none; }
+    .sb-q summary .marker {
+      flex: 0 0 22px; width: 22px; height: 22px; border-radius: 50%;
+      border: 1px solid var(--line); display: flex; align-items: center; justify-content: center;
+      color: var(--muted); font-size: 14px; transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+    .sb-q[open] summary .marker { transform: rotate(45deg); border-color: var(--amber); color: var(--amber); }
+    .sb-q .body {
+      margin-top: 14px; color: var(--muted); font-size: 15px; line-height: 1.6;
+      max-width: 760px;
+    }
+
+    /* final cta band */
+    .sb-final {
+      margin: 96px 0 0; padding: 120px 8vw;
+      max-width: 100%; text-align: center;
+      background:
+        radial-gradient(circle at 50% 30%, rgba(255, 184, 0, 0.12), transparent 50%),
+        var(--bg-2);
+      border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+    }
+    .sb-final-h {
+      font-family: var(--serif); font-style: italic; font-weight: 400;
+      font-size: clamp(40px, 6vw, 80px); line-height: 1.02; letter-spacing: -0.02em;
+      max-width: 980px; margin: 0 auto 28px;
+    }
+    .sb-final-sub { color: var(--muted); font-size: 17px; line-height: 1.55; max-width: 600px; margin: 0 auto 40px; }
+    .sb-final .sb-cta-row { justify-content: center; }
+
+    /* footer */
+    .sb-foot {
+      max-width: 1280px; margin: 0 auto; padding: 38px 8vw 60px;
+      display: flex; justify-content: space-between; align-items: center;
+      font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; color: var(--muted-2);
+    }
+    .sb-foot a { color: var(--muted); transition: color 0.2s ease; }
+    .sb-foot a:hover { color: var(--amber); }
+
+    /* responsive */
+    @media (max-width: 880px) {
+      .sb-stats, .sb-three-col, .sb-problem-grid, .sb-fit, .sb-included, .sb-price {
+        grid-template-columns: 1fr;
+      }
+      .sb-stat { border-right: 0; border-bottom: 1px solid var(--line); }
+      .sb-stat:last-child { border-bottom: 0; }
+      .sb-price-side + .sb-price-side { border-left: 0; border-top: 1px solid var(--line); }
+      .sb-step { grid-template-columns: 60px 1fr; gap: 20px; }
+      .sb-step .n { font-size: 36px; }
+      .sb-section { padding: 72px 6vw; }
+      .sb-hero { padding: 56px 6vw 80px; }
+    }
+  </style>
+</head>
+<body data-voice="real">
+  <!-- voice toggle (same component as portfolio) -->
+  <button class="voice-toggle" id="voiceToggle" aria-label="Toggle voice">
+    <span class="voice-toggle-track">
+      <span class="voice-toggle-thumb"></span>
+    </span>
+    <span class="voice-toggle-labels">
+      <span data-voice-state="formal">FORMAL</span>
+      <span data-voice-state="real">REAL</span>
+    </span>
+  </button>
+
+  <!-- nav (single back link) -->
+  <nav class="sb-nav">
+    <a href="/" class="sb-back">← thomasgoggin.com</a>
+    <span class="sb-eyebrow"><span class="dot"></span><span data-formal="SETTER BOT · PRODUCTIZED OFFER" data-real="SETTER BOT · the offer">SETTER BOT · the offer</span></span>
+  </nav>
+
+  <main class="sb-page">
+
+    <!-- HERO -->
+    <section class="sb-hero">
+      <div class="sb-eyebrow-row">
+        <span data-formal="VOICE-MATCHED SMS SALES BOT" data-real="THE BOT THAT CLOSES WHILE YOURE ASLEEP">THE BOT THAT CLOSES WHILE YOURE ASLEEP</span>
+        <span class="sep"></span>
+        <span>$3,500 + $1,200/mo</span>
+      </div>
+
+      <h1 class="sb-h1">
+        <span data-formal="A bot that texts your leads in your exact voice." data-real="Texts your leads. In your voice. While youre asleep.">Texts your leads. In your voice. While youre asleep.</span>
+      </h1>
+
+      <p class="sb-sub">
+        <span data-formal="Voice-matched SMS sales bot. Replies to every paid lead in under 30 seconds, sounds exactly like you wrote it, books qualified calls straight to your calendar. Built on Twilio + Claude + your CRM. Live in 14 days." data-real="It replies in <strong>under 30 seconds</strong>. It sounds exactly like <strong>the way you actually text</strong>. It books real calls on your real calendar. And it works at 2am, on Sunday, when youre on a job site.">It replies in <strong>under 30 seconds</strong>. It sounds exactly like <strong>the way you actually text</strong>. It books real calls on your real calendar. And it works at 2am, on Sunday, when youre on a job site.</span>
+      </p>
+
+      <div class="sb-cta-row">
+        <a href="https://cal.com/thomasgoggin/setter-bot" class="sb-btn sb-btn-primary" target="_blank" rel="noopener">
+          <span data-formal="Book a 15-minute discovery call" data-real="Book a 15-min call">Book a 15-min call</span>
+          <span class="arrow">→</span>
+        </a>
+        <a href="#pricing" class="sb-btn sb-btn-secondary">
+          <span data-formal="See what's included" data-real="See whats in it">See whats in it</span>
+        </a>
+        <span class="sb-cta-meta">
+          <span data-formal="No discovery questionnaire. 1 call." data-real="no funnel · no questionnaire">no funnel · no questionnaire</span>
+        </span>
+      </div>
+    </section>
+
+    <!-- STATS STRIP -->
+    <section class="sb-stats">
+      <div class="sb-stat">
+        <div class="sb-stat-n">&lt;30s</div>
+        <div class="sb-stat-l"><span data-formal="MEDIAN REPLY TIME" data-real="REPLY TIME">REPLY TIME</span></div>
+      </div>
+      <div class="sb-stat">
+        <div class="sb-stat-n">24/7</div>
+        <div class="sb-stat-l"><span data-formal="AVAILABILITY" data-real="ALWAYS AWAKE">ALWAYS AWAKE</span></div>
+      </div>
+      <div class="sb-stat">
+        <div class="sb-stat-n">14 days</div>
+        <div class="sb-stat-l"><span data-formal="SETUP TO LIVE" data-real="FROM HIRE TO LIVE">FROM HIRE TO LIVE</span></div>
+      </div>
+    </section>
+
+    <!-- PROBLEM -->
+    <section class="sb-section" id="problem">
+      <div class="sb-section-eyebrow"><span data-formal="THE PROBLEM" data-real="WHY THIS EXISTS">WHY THIS EXISTS</span></div>
+      <h2 class="sb-section-h">
+        <span data-formal="Paid leads die fast. Most of them die because no one replied in time." data-real="You bought the lead. Then you waited 4 hours to text back. Lead is dead.">You bought the lead. Then you waited 4 hours to text back. Lead is dead.</span>
+      </h2>
+      <p class="sb-section-lede">
+        <span data-formal="Industry research is consistent: lead conversion drops sharply after the first 5 minutes, and the difference between a 5-second response and a 1-hour response is measured in multiples, not percentages." data-real="Lead came in. You were on a roof, on a call, at lunch, asleep. The lead texted three of your competitors while waiting. You lost it before you ever saw it.">Lead came in. You were on a roof, on a call, at lunch, asleep. The lead texted three of your competitors while waiting. You lost it before you ever saw it.</span>
+      </p>
+
+      <div class="sb-problem-grid">
+        <div class="sb-problem-card">
+          <div class="pl">RESPONSE TIME</div>
+          <div class="pn">100x</div>
+          <p>
+            <span data-formal="Leads contacted within 5 minutes are 100x more likely to convert than leads contacted after 30 minutes." data-real="A lead replied to in 5 minutes converts 100x better than one replied to in 30 minutes. You read that right. Not 100%. 100x.">A lead replied to in 5 minutes converts 100x better than one replied to in 30 minutes. You read that right. Not 100%. 100x.</span>
+          </p>
+          <div class="src">SOURCE: HARVARD BUSINESS REVIEW LEAD-RESPONSE STUDY</div>
+        </div>
+        <div class="sb-problem-card">
+          <div class="pl">DROP-OFF</div>
+          <div class="pn">~70%</div>
+          <p>
+            <span data-formal="Most paid lead spend is wasted on leads that go cold from slow follow-up alone, not from lack of intent." data-real="The lead wasnt bad. The follow-up was slow. ~70% of your paid lead budget gets eaten by your reply time, not by bad leads.">The lead wasnt bad. The follow-up was slow. ~70% of your paid lead budget gets eaten by your reply time, not by bad leads.</span>
+          </p>
+          <div class="src">SOURCE: VENDASTA / RICOCHET / DRIFT BENCHMARKS</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHAT IT IS -->
+    <section class="sb-section" id="what">
+      <div class="sb-section-eyebrow"><span data-formal="WHAT IT IS" data-real="WHAT YOURE BUYING">WHAT YOURE BUYING</span></div>
+      <h2 class="sb-section-h">
+        <span data-formal="A custom SMS bot trained on your real conversations." data-real="A bot that texts like you. Not like a bot pretending to be you.">A bot that texts like you. Not like a bot pretending to be you.</span>
+      </h2>
+      <p class="sb-section-lede">
+        <span data-formal="The bot is voice-matched, not template-matched. It learns your phrasing, your rhythm, the things you actually say from a sample of your real text history. It picks up new leads, qualifies them, handles common objections, and books a call when they're ready." data-real="Most AI bots sound like AI. This one sounds like you because its built from your real texts. Same phrasing. Same casual punctuation. Same way you handle the same objections you handle every day. It picks up the lead in seconds, has a real conversation, and books a call when its time.">Most AI bots sound like AI. This one sounds like you because its built from your real texts. Same phrasing. Same casual punctuation. Same way you handle the same objections you handle every day. It picks up the lead in seconds, has a real conversation, and books a call when its time.</span>
+      </p>
+
+      <div class="sb-three-col">
+        <div class="sb-card">
+          <div class="ico">/01 · VOICE</div>
+          <h3><span data-formal="Trained on your real messages." data-real="Sounds like you, because it is you.">Sounds like you, because it is you.</span></h3>
+          <p><span data-formal="We extract a sanitized sample of your text history with leads. The bot's persona is built from how YOU phrase things, not from a template. Most prospects can't tell." data-real="I pull a sample of your real lead conversations (sanitized, no PII). The bots personality is literally built from how you talk. People dont guess its a bot in the first 5 messages.">I pull a sample of your real lead conversations (sanitized, no PII). The bots personality is literally built from how you talk. People dont guess its a bot in the first 5 messages.</span></p>
+        </div>
+        <div class="sb-card">
+          <div class="ico">/02 · SPEED</div>
+          <h3><span data-formal="Responds in under 30 seconds." data-real="Beats every competitor on speed. Not close.">Beats every competitor on speed. Not close.</span></h3>
+          <p><span data-formal="Webhook-driven. New lead in your CRM triggers a reply before the lead has put their phone down. Available 24/7, no shift coverage, no PTO, no slow Mondays." data-real="Lead comes in. The bot replies before they pocket their phone. Sunday at 11pm, Christmas morning, 3am, doesnt matter. Never slow, never tired, never on lunch break.">Lead comes in. The bot replies before they pocket their phone. Sunday at 11pm, Christmas morning, 3am, doesnt matter. Never slow, never tired, never on lunch break.</span></p>
+        </div>
+        <div class="sb-card">
+          <div class="ico">/03 · CRM</div>
+          <h3><span data-formal="Books to your real calendar." data-real="Books real calls. On your real calendar.">Books real calls. On your real calendar.</span></h3>
+          <p><span data-formal="Booked calls land directly in your CRM (GoHighLevel, HubSpot, Close, etc.) at the right pipeline stage. SMS confirmation goes out. You get notified. Nothing gets lost." data-real="The bot doesnt fake-book. It actually puts the appointment on your calendar, drops the lead in your pipeline, sends the confirmation, and pings you. Then you walk into the call ready, not scrambling.">The bot doesnt fake-book. It actually puts the appointment on your calendar, drops the lead in your pipeline, sends the confirmation, and pings you. Then you walk into the call ready, not scrambling.</span></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="sb-section" id="how">
+      <div class="sb-section-eyebrow"><span data-formal="HOW IT WORKS" data-real="THE 14 DAYS">THE 14 DAYS</span></div>
+      <h2 class="sb-section-h">
+        <span data-formal="Hire today. Live in 14 days." data-real="Sign Friday. Live in two weeks. No drama.">Sign Friday. Live in two weeks. No drama.</span>
+      </h2>
+
+      <div class="sb-steps">
+        <div class="sb-step">
+          <div class="n">01</div>
+          <div>
+            <h4><span data-formal="Day 1-2 · Voice extraction" data-real="Day 1-2 · I read your texts (the legal way)">Day 1-2 · I read your texts (the legal way)</span></h4>
+            <p><span data-formal="You upload a sanitized export of your last few months of lead conversations. We strip phone numbers, emails, addresses, and any PII before training. The result is a voice profile of how you actually communicate with leads." data-real="You send me a sanitized export of your real lead texts. I strip out the personal info before anything trains on it. What I keep is your phrasing, your slang, the way you handle the same five objections you handle every week.">You send me a sanitized export of your real lead texts. I strip out the personal info before anything trains on it. What I keep is your phrasing, your slang, the way you handle the same five objections you handle every week.</span></p>
+          </div>
+        </div>
+        <div class="sb-step">
+          <div class="n">02</div>
+          <div>
+            <h4><span data-formal="Day 3-7 · Build + voice tuning" data-real="Day 3-7 · I build it. You poke it.">Day 3-7 · I build it. You poke it.</span></h4>
+            <p><span data-formal="I deploy the bot on a Twilio number provisioned for your business. You text it like a lead would. We iterate on phrasing, objection handling, and the booking flow until the bot is indistinguishable from your actual replies." data-real="I deploy the bot on a Twilio number for your business. You text it like youre a lead. We tune it back and forth until you cant tell the bot from your own replies. Most clients say it nails it by day 5.">I deploy the bot on a Twilio number for your business. You text it like youre a lead. We tune it back and forth until you cant tell the bot from your own replies. Most clients say it nails it by day 5.</span></p>
+          </div>
+        </div>
+        <div class="sb-step">
+          <div class="n">03</div>
+          <div>
+            <h4><span data-formal="Day 8-12 · CRM + calendar wiring" data-real="Day 8-12 · Wire it into your stack">Day 8-12 · Wire it into your stack</span></h4>
+            <p><span data-formal="Integration with your CRM (GoHighLevel, HubSpot, Close, Pipedrive). Lead intake webhook configured, pipeline stages mapped, calendar lookup wired to Cal.com or your existing booking system. Confirmation flow tested." data-real="The bot gets hooked into your CRM and your calendar. New lead enters your pipeline = bot fires. Booking lands in your real calendar with confirmation. We test it from end to end before any real lead touches it.">The bot gets hooked into your CRM and your calendar. New lead enters your pipeline = bot fires. Booking lands in your real calendar with confirmation. We test it from end to end before any real lead touches it.</span></p>
+          </div>
+        </div>
+        <div class="sb-step">
+          <div class="n">04</div>
+          <div>
+            <h4><span data-formal="Day 13-14 · Soft launch + handoff" data-real="Day 13-14 · Live. Watching. Tuning.">Day 13-14 · Live. Watching. Tuning.</span></h4>
+            <p><span data-formal="Soft launch on a fraction of your inbound. I monitor every conversation for 48 hours. Anything weird, I flag and fix in real time. By day 14 you're at full volume, with a Slack channel for direct access." data-real="Live on a slice of your real leads. I watch every conversation for 48 hours and fix anything off in real time. By day 14 the bot is taking your full volume. You get a Slack channel for direct access from then on.">Live on a slice of your real leads. I watch every conversation for 48 hours and fix anything off in real time. By day 14 the bot is taking your full volume. You get a Slack channel for direct access from then on.</span></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- INCLUDED -->
+    <section class="sb-section" id="included">
+      <div class="sb-section-eyebrow"><span data-formal="WHATS INCLUDED" data-real="EVERYTHING THATS COVERED">EVERYTHING THATS COVERED</span></div>
+      <h2 class="sb-section-h">
+        <span data-formal="One price. No surprise add-ons." data-real="One price. No surprise invoices.">One price. No surprise invoices.</span>
+      </h2>
+
+      <div class="sb-included">
+        <div class="sb-include-item">
+          <span class="check">✓</span>
+          <span class="label">
+            <span data-formal="Custom voice-matched persona built from your real conversations" data-real="Voice persona built from your actual texts">Voice persona built from your actual texts</span>
+            <small><span data-formal="Sanitized, PII-stripped, watermarked. Yours alone." data-real="Sanitized, PII out. No other client gets a sample of your voice.">Sanitized, PII out. No other client gets a sample of your voice.</span></small>
+          </span>
+        </div>
+        <div class="sb-include-item">
+          <span class="check">✓</span>
+          <span class="label">
+            <span data-formal="Dedicated Twilio number with A2P 10DLC compliance handled" data-real="Dedicated Twilio number, A2P paperwork done">Dedicated Twilio number, A2P paperwork done</span>
+            <small><span data-formal="Brand and campaign registration handled by us. ~2-4 week clock starts on signing." data-real="I file the A2P stuff. Yes its annoying. Yes you have to do it. No you dont have to think about it.">I file the A2P stuff. Yes its annoying. Yes you have to do it. No you dont have to think about it.</span></small>
+          </span>
+        </div>
+        <div class="sb-include-item">
+          <span class="check">✓</span>
+          <span class="label">
+            <span data-formal="CRM integration (GoHighLevel, HubSpot, Close, or Pipedrive)" data-real="CRM hookup (GHL, HubSpot, Close, Pipedrive)">CRM hookup (GHL, HubSpot, Close, Pipedrive)</span>
+            <small><span data-formal="New lead webhook in, pipeline stage mapping, contact creation, booking handoff." data-real="Lead lands in the pipeline at the right stage. Booking gets attached. Nothing falls through.">Lead lands in the pipeline at the right stage. Booking gets attached. Nothing falls through.</span></small>
+          </span>
+        </div>
+        <div class="sb-include-item">
+          <span class="check">✓</span>
+          <span class="label">
+            <span data-formal="Calendar integration (Cal.com, GHL Calendar, Google Calendar)" data-real="Calendar booking (Cal.com, GHL, Google)">Calendar booking (Cal.com, GHL, Google)</span>
+            <small><span data-formal="Real availability lookup, real booking, real confirmation. No fake slots." data-real="Bot says 2:30 Thursday is open = 2:30 Thursday is actually open. Confirms in writing.">Bot says 2:30 Thursday is open = 2:30 Thursday is actually open. Confirms in writing.</span></small>
+          </span>
+        </div>
+        <div class="sb-include-item">
+          <span class="check">✓</span>
+          <span class="label">
+            <span data-formal="Tone reveal + handoff logic when prospects ask 'is this a bot?'" data-real="Honest reveal when someone asks 'is this a bot?'">Honest reveal when someone asks "is this a bot?"</span>
+            <small><span data-formal="The bot doesn't lie. Configurable reveal turn (5-6 messages or explicit ask) hands the conversation to a human or admits the AI gracefully." data-real="The bot doesnt lie. After ~5 turns or if they ask, it tells the truth and offers to hand off to you. People respect that. Worth more than the lie.">The bot doesnt lie. After ~5 turns or if they ask, it tells the truth and offers to hand off to you. People respect that. Worth more than the lie.</span></small>
+          </span>
+        </div>
+        <div class="sb-include-item">
+          <span class="check">✓</span>
+          <span class="label">
+            <span data-formal="Slack channel for direct access (24-hour weekday response)" data-real="Direct Slack access (I reply within 24h on weekdays)">Direct Slack access (I reply within 24h on weekdays)</span>
+            <small><span data-formal="Anything weird, anything unclear, anything you want changed, you ping me. No tickets." data-real="No support tickets. No 'fill out this form.' Slack me, I respond.">No support tickets. No "fill out this form." Slack me, I respond.</span></small>
+          </span>
+        </div>
+        <div class="sb-include-item">
+          <span class="check">✓</span>
+          <span class="label">
+            <span data-formal="Eval pipeline against real failure cases (monthly under retainer)" data-real="Monthly eval against real conversations that didnt go well">Monthly eval against real conversations that didnt go well</span>
+            <small><span data-formal="Real test cases from real edge-case conversations. Voice-match score and conversion drift tracked." data-real="Each month I run the bot against the conversations that didnt convert that month, score voice-match drift, fix the prompt. Voice doesnt rot in 90 days.">Each month I run the bot against the conversations that didnt convert that month, score voice-match drift, fix the prompt. Voice doesnt rot in 90 days.</span></small>
+          </span>
+        </div>
+        <div class="sb-include-item">
+          <span class="check">✓</span>
+          <span class="label">
+            <span data-formal="Anthropic + Twilio infrastructure costs covered up to current lead volume" data-real="API + SMS costs on me up to your current volume">API + SMS costs on me up to your current volume</span>
+            <small><span data-formal="No surprise platform bills. Volume-based escalation reviewed quarterly." data-real="You wont get a separate bill from Twilio or Anthropic until your volume changes a lot. We talk before that happens.">You wont get a separate bill from Twilio or Anthropic until your volume changes a lot. We talk before that happens.</span></small>
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <!-- DEMO -->
+    <section class="sb-section" id="demo">
+      <div class="sb-section-eyebrow"><span data-formal="THE LIVE DEMO" data-real="TRY IT YOURSELF">TRY IT YOURSELF</span></div>
+      <h2 class="sb-section-h">
+        <span data-formal="A real bot, on a real number, replying right now." data-real="Text the demo bot. See it for yourself.">Text the demo bot. See it for yourself.</span>
+      </h2>
+      <p class="sb-section-lede">
+        <span data-formal="The fastest way to evaluate this offer is to talk to the demo. It's voice-matched to me, sells a hypothetical product, and reveals itself if you ask if it's a bot." data-real="Easiest way to know if this works: text the demo and try to break it. Its voice-matched to me, selling a fake product, and itll tell you its a bot if you ask.">Easiest way to know if this works: text the demo and try to break it. Its voice-matched to me, selling a fake product, and itll tell you its a bot if you ask.</span>
+      </p>
+
+      <div class="sb-demo">
+        <div class="pending"><span data-formal="LIVE DEMO COMING MAY 25" data-real="LIVE DEMO COMING MAY 25 · A2P PENDING">LIVE DEMO COMING MAY 25 · A2P PENDING</span></div>
+        <div class="label"><span data-formal="DEMO NUMBER" data-real="TEXT THIS NUMBER">TEXT THIS NUMBER</span></div>
+        <div class="number" id="demoNumber">+1 (843) ___-____</div>
+        <p class="hint">
+          <span data-formal="The number is provisioned and the bot is built. Live for public texting once carrier registration completes (May 22-25 estimated)." data-real="The bot is built and the number is locked. Carriers gate SMS for new numbers (~3 weeks). Once it clears, this number is live and youll see a real conversation.">The bot is built and the number is locked. Carriers gate SMS for new numbers (~3 weeks). Once it clears, this number is live and youll see a real conversation.</span>
+        </p>
+        <p class="alt">
+          <span data-formal="Want a private demo before then? " data-real="Cant wait? ">Cant wait? </span>
+          <a href="mailto:thomas@thomasgoggin.com?subject=Setter%20Bot%20demo%20request"><span data-formal="Email me for a screen-recorded demo." data-real="Email me, Ill send a 90-second video.">Email me, Ill send a 90-second video.</span></a>
+        </p>
+      </div>
+    </section>
+
+    <!-- PRICING -->
+    <section class="sb-section" id="pricing">
+      <div class="sb-section-eyebrow"><span data-formal="PRICING" data-real="WHAT IT COSTS">WHAT IT COSTS</span></div>
+      <h2 class="sb-section-h">
+        <span data-formal="Two line items. Both transparent." data-real="Two numbers. Thats the whole pricing page.">Two numbers. Thats the whole pricing page.</span>
+      </h2>
+
+      <div class="sb-price">
+        <div class="sb-price-side">
+          <div class="lab"><span data-formal="ONE-TIME · SETUP" data-real="ONCE · TO BUILD IT">ONCE · TO BUILD IT</span></div>
+          <div class="amt">$3,500<span class="unit">setup</span></div>
+          <p class="desc"><span data-formal="Voice extraction, persona build, Twilio + A2P, CRM/calendar integration, soft launch, handoff." data-real="Pays for the build. 14 days from signing to live, voice-matched, in your stack.">Pays for the build. 14 days from signing to live, voice-matched, in your stack.</span></p>
+          <ul>
+            <li><span data-formal="Custom persona from your real conversations" data-real="Persona from your real texts">Persona from your real texts</span></li>
+            <li><span data-formal="Twilio number + A2P 10DLC handled" data-real="Twilio number + A2P paperwork">Twilio number + A2P paperwork</span></li>
+            <li><span data-formal="Full CRM + calendar integration" data-real="CRM + calendar wired up">CRM + calendar wired up</span></li>
+            <li><span data-formal="14-day delivery, soft-launch handoff" data-real="14 days. Soft launch. Live.">14 days. Soft launch. Live.</span></li>
+          </ul>
+        </div>
+        <div class="sb-price-side">
+          <div class="lab"><span data-formal="MONTHLY · CARE + GROWTH" data-real="MONTHLY · TO KEEP IT SHARP">MONTHLY · TO KEEP IT SHARP</span></div>
+          <div class="amt">$1,200<span class="unit">/month</span></div>
+          <p class="desc"><span data-formal="Voice tuning, eval pipeline, new conversation flows, infra costs covered, direct Slack access." data-real="Pays for keeping it dialed. Voice drifts in 60-90 days without tuning. This stops that.">Pays for keeping it dialed. Voice drifts in 60-90 days without tuning. This stops that.</span></p>
+          <ul>
+            <li><span data-formal="Monthly voice tuning + eval pipeline" data-real="Monthly voice tuning, real-failure evals">Monthly voice tuning, real-failure evals</span></li>
+            <li><span data-formal="One new conversation flow per month" data-real="One new flow per month (new offer, new objection)">One new flow per month (new offer, new objection)</span></li>
+            <li><span data-formal="Anthropic + Twilio infrastructure costs" data-real="API + SMS costs covered (current volume)">API + SMS costs covered (current volume)</span></li>
+            <li><span data-formal="Direct Slack access, 24-hour weekday response" data-real="Direct Slack, fast replies">Direct Slack, fast replies</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- FIT -->
+    <section class="sb-section" id="fit">
+      <div class="sb-section-eyebrow"><span data-formal="WHO ITS FOR · AND NOT FOR" data-real="HONESTY">HONESTY</span></div>
+      <h2 class="sb-section-h">
+        <span data-formal="This isn't for everyone, and the wrong fit will burn money on both sides." data-real="If you arent in the green box, dont sign. Im not desperate, you arent stupid.">If you arent in the green box, dont sign. Im not desperate, you arent stupid.</span>
+      </h2>
+
+      <div class="sb-fit">
+        <div class="sb-fit-card yes">
+          <h4><span data-formal="GOOD FIT" data-real="GREEN BOX · YOU">GREEN BOX · YOU</span></h4>
+          <ul>
+            <li><span data-formal="Owner-operator or small sales team in home services, solar, roofing, HVAC, pest, mortgage, real estate, med-spa, telehealth" data-real="Owner-operator running solar, roofing, HVAC, pest, mortgage, real estate, med-spa, or similar">Owner-operator running solar, roofing, HVAC, pest, mortgage, real estate, med-spa, or similar</span></li>
+            <li><span data-formal="Spending $3,000+/month on paid lead generation" data-real="Spending $3K+/mo on paid leads">Spending $3K+/mo on paid leads</span></li>
+            <li><span data-formal="Have a CRM (GoHighLevel, HubSpot, Close, etc.) leads already flow into" data-real="Already have a CRM leads land in">Already have a CRM leads land in</span></li>
+            <li><span data-formal="Have a working calendar booking system or are willing to set up Cal.com" data-real="Have a calendar tool, or willing to set one up">Have a calendar tool, or willing to set one up</span></li>
+            <li><span data-formal="Can pull a sanitized export of last 90 days of lead conversations" data-real="Can pull your last 90 days of lead texts (sanitized)">Can pull your last 90 days of lead texts (sanitized)</span></li>
+            <li><span data-formal="Want SMS as your primary inbound conversion channel, not email" data-real="SMS is your channel, not email">SMS is your channel, not email</span></li>
+          </ul>
+        </div>
+        <div class="sb-fit-card no">
+          <h4><span data-formal="WRONG FIT" data-real="RED BOX · NOT YOU">RED BOX · NOT YOU</span></h4>
+          <ul>
+            <li><span data-formal="Need fully autonomous closing without human handoff (this isn't that)" data-real="You want it to close deals end-to-end with no human. Thats not what this is.">You want it to close deals end-to-end with no human. Thats not what this is.</span></li>
+            <li><span data-formal="No CRM, no pipeline, no working lead intake" data-real="No CRM, no pipeline, no clear lead source">No CRM, no pipeline, no clear lead source</span></li>
+            <li><span data-formal="Volume below ~50 inbound leads per month" data-real="Less than ~50 leads/mo (math doesnt work)">Less than ~50 leads/mo (math doesnt work)</span></li>
+            <li><span data-formal="Healthcare, financial advice, or regulated content where AI handoff is restricted" data-real="Regulated space (healthcare advice, financial advice) where this gets legally weird">Regulated space (healthcare advice, financial advice) where this gets legally weird</span></li>
+            <li><span data-formal="Need integration with a CRM not on the supported list (talk to me anyway)" data-real="On a CRM I havent built into yet (still talk to me)">On a CRM I havent built into yet (still talk to me)</span></li>
+            <li><span data-formal="Looking for cheapest possible option" data-real="Hunting cheapest option. Im not it.">Hunting cheapest option. Im not it.</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="sb-section" id="faq">
+      <div class="sb-section-eyebrow"><span data-formal="FAQ" data-real="REAL QUESTIONS PEOPLE ASK">REAL QUESTIONS PEOPLE ASK</span></div>
+      <h2 class="sb-section-h">
+        <span data-formal="The questions everyone asks before buying." data-real="What everyone asks me before they sign.">What everyone asks me before they sign.</span>
+      </h2>
+
+      <div class="sb-faq">
+        <details class="sb-q">
+          <summary>
+            <span data-formal="Will my leads know it's a bot?" data-real="Will my leads figure out its a bot?">Will my leads figure out its a bot?</span>
+            <span class="marker">+</span>
+          </summary>
+          <div class="body"><span data-formal="In the first 5-6 messages, almost never. The bot is voice-matched to your real history, so the rhythm and word choice are yours. If a lead directly asks 'are you a bot,' the bot tells the truth and offers to bring you in. Lying to a lead destroys trust faster than any benefit it buys." data-real="First 5-6 messages, almost no one. Its built from how you actually write. If they outright ask 'are you a bot,' the bot says yes and offers to grab you. Lying to a lead is worse than admitting an AI is on the front line.">First 5-6 messages, almost no one. Its built from how you actually write. If they outright ask "are you a bot," the bot says yes and offers to grab you. Lying to a lead is worse than admitting an AI is on the front line.</span></div>
+        </details>
+        <details class="sb-q">
+          <summary>
+            <span data-formal="What if my voice changes or my offer evolves?" data-real="What if my voice or offer changes?">What if my voice or offer changes?</span>
+            <span class="marker">+</span>
+          </summary>
+          <div class="body"><span data-formal="That's what the monthly retainer covers. Each month I tune the bot against the most recent conversations and you can swap in new conversation flows for new offers, seasonal pushes, or new objection patterns." data-real="Thats literally what the $1,200/mo is for. Each month I tune against your latest real conversations and you can swap in a new flow for a new season, new offer, new objection.">Thats literally what the $1,200/mo is for. Each month I tune against your latest real conversations and you can swap in a new flow for a new season, new offer, new objection.</span></div>
+        </details>
+        <details class="sb-q">
+          <summary>
+            <span data-formal="Can I cancel the monthly retainer?" data-real="Can I cancel monthly?">Can I cancel monthly?</span>
+            <span class="marker">+</span>
+          </summary>
+          <div class="body"><span data-formal="Yes. Month-to-month, no contract lock-in beyond the initial 60 days (which exist so the build doesn't get stranded). After 60 days, cancel any time with 30 days notice." data-real="Yes. First 60 days are committed (so I dont leave you stranded mid-build). After that, month-to-month, 30 days notice to cancel.">Yes. First 60 days are committed (so I dont leave you stranded mid-build). After that, month-to-month, 30 days notice to cancel.</span></div>
+        </details>
+        <details class="sb-q">
+          <summary>
+            <span data-formal="What happens if my bot says something wrong?" data-real="What if the bot screws up?">What if the bot screws up?</span>
+            <span class="marker">+</span>
+          </summary>
+          <div class="body"><span data-formal="During the soft launch (days 13-14) I monitor every conversation in real time. After live launch, the eval pipeline runs against new failure cases monthly. Critical fixes happen within 24 hours via the Slack channel. Hard guardrails (no pricing commitments without a call, no medical/legal advice, no claims about specific outcomes) are baked into the prompt." data-real="During soft launch I watch every conversation. After live, the bot has hard rules baked in (no pricing without a call, no medical or legal advice, no specific outcome claims). If something weird slips through, you Slack me, I fix it the same day.">During soft launch I watch every conversation. After live, the bot has hard rules baked in (no pricing without a call, no medical or legal advice, no specific outcome claims). If something weird slips through, you Slack me, I fix it the same day.</span></div>
+        </details>
+        <details class="sb-q">
+          <summary>
+            <span data-formal="Can I see it work for clients in my industry?" data-real="Got proof from someone in my space?">Got proof from someone in my space?</span>
+            <span class="marker">+</span>
+          </summary>
+          <div class="body"><span data-formal="Live deployments today: a spring-break travel company (SMS sales), an aesthetic medicine clinic (patient setter), a solar lead-gen agency (receptionist), and a paid-lead operations system. Industry-specific case studies available on request." data-real="Live right now: travel sales bot for a spring break company, patient setter bot for an aesthetic medicine clinic, voice receptionist for a solar lead-gen agency, full lead-gen system for an SMS marketing agency. Email me, Ill send the case study closest to your space.">Live right now: travel sales bot for a spring break company, patient setter bot for an aesthetic medicine clinic, voice receptionist for a solar lead-gen agency, full lead-gen system for an SMS marketing agency. Email me, Ill send the case study closest to your space.</span></div>
+        </details>
+        <details class="sb-q">
+          <summary>
+            <span data-formal="Is my data shared with other clients?" data-real="Does my voice train someone elses bot?">Does my voice train someone elses bot?</span>
+            <span class="marker">+</span>
+          </summary>
+          <div class="body"><span data-formal="Never. Each client's voice samples are isolated to their persona, watermarked, and never used to train any other deployment. Each client gets their own Twilio subaccount, their own Cloudflare Worker, and their own data plane." data-real="Never. Your voice samples are watermarked and only train your bot. Each client has their own Twilio subaccount, their own Cloudflare Worker, their own data. No shared training pool.">Never. Your voice samples are watermarked and only train your bot. Each client has their own Twilio subaccount, their own Cloudflare Worker, their own data. No shared training pool.</span></div>
+        </details>
+        <details class="sb-q">
+          <summary>
+            <span data-formal="Why $3,500 setup specifically?" data-real="Why $3,500?">Why $3,500?</span>
+            <span class="marker">+</span>
+          </summary>
+          <div class="body"><span data-formal="Roughly 25 hours of voice extraction, persona engineering, evaluation, and integration work, priced at the bottom of agency rates because the system is templated and I'm taking a small number of clients on this offer." data-real="Itll take me ~25 hours of build for the first 5 clients. Pricing it at agency-floor rate because Im rolling out the productized version. Number goes up after the first 10 installs.">Itll take me ~25 hours of build for the first 5 clients. Pricing it at agency-floor rate because Im rolling out the productized version. Number goes up after the first 10 installs.</span></div>
+        </details>
+      </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="sb-final">
+      <h2 class="sb-final-h">
+        <span data-formal="The next lead is going to text in. Will you reply in time?" data-real="The next lead texts in 4 hours. Will you reply, or will the bot?">The next lead texts in 4 hours. Will you reply, or will the bot?</span>
+      </h2>
+      <p class="sb-final-sub">
+        <span data-formal="One 15-minute call. Either it's a fit or it isn't. No follow-up funnel, no nurture sequence." data-real="15 min call. Either yes or no. No funnels.">15 min call. Either yes or no. No funnels.</span>
+      </p>
+      <div class="sb-cta-row">
+        <a href="https://cal.com/thomasgoggin/setter-bot" class="sb-btn sb-btn-primary" target="_blank" rel="noopener">
+          <span data-formal="Book the discovery call" data-real="Book the call">Book the call</span>
+          <span class="arrow">→</span>
+        </a>
+        <a href="mailto:thomas@thomasgoggin.com?subject=Setter%20Bot" class="sb-btn sb-btn-secondary">
+          <span data-formal="Email me directly" data-real="Or just email me">Or just email me</span>
+        </a>
+      </div>
+    </section>
+
+    <footer class="sb-foot">
+      <div>© <span id="year"></span> Thomas Goggin · <span data-formal="CHARLESTON, SC" data-real="Charleston, SC">Charleston, SC</span></div>
+      <div>
+        <a href="/">← <span data-formal="back to portfolio" data-real="back to the floor">back to the floor</span></a>
+      </div>
+    </footer>
+  </main>
+
+  <!-- custom cursor (matches portfolio) -->
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <script>
+    // self-contained, doesnt depend on script.js
+    (() => {
+      const yearEl = document.getElementById("year");
+      if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+      const body = document.body;
+      const voiceToggle = document.getElementById("voiceToggle");
+
+      function applyVoice(state) {
+        body.dataset.voice = state;
+        document.querySelectorAll("[data-formal][data-real]").forEach((el) => {
+          // innerHTML so inline emphasis (<strong>, <em>) renders. Copy is hardcoded, no XSS surface.
+          el.innerHTML = state === "formal" ? el.dataset.formal : el.dataset.real;
+        });
+        try { localStorage.setItem("tg-voice", state); } catch (_) {}
+      }
+
+      let savedVoice = "real";
+      try { savedVoice = localStorage.getItem("tg-voice") || "real"; } catch (_) {}
+      applyVoice(savedVoice);
+
+      voiceToggle?.addEventListener("click", () => {
+        const next = body.dataset.voice === "real" ? "formal" : "real";
+        applyVoice(next);
+      });
+
+      document.addEventListener("keydown", (e) => {
+        if (e.target.matches("input, textarea")) return;
+        if (e.key.toLowerCase() === "v" && !e.metaKey && !e.ctrlKey && !e.altKey) {
+          const next = body.dataset.voice === "real" ? "formal" : "real";
+          applyVoice(next);
+        }
+      });
+
+      // custom cursor
+      const cursor = document.getElementById("cursor");
+      const cursorRing = document.getElementById("cursorRing");
+      let mx = window.innerWidth / 2, my = window.innerHeight / 2;
+      let rx = mx, ry = my;
+      if (cursor && cursorRing && window.matchMedia("(pointer: fine)").matches) {
+        document.addEventListener("mousemove", (e) => {
+          mx = e.clientX; my = e.clientY;
+          cursor.style.transform = `translate(${mx}px, ${my}px) translate(-50%, -50%)`;
+        });
+        function loop() {
+          rx += (mx - rx) * 0.18;
+          ry += (my - ry) * 0.18;
+          cursorRing.style.transform = `translate(${rx}px, ${ry}px) translate(-50%, -50%)`;
+          requestAnimationFrame(loop);
+        }
+        loop();
+        const hoverables = "a, button, .sb-q summary";
+        document.addEventListener("mouseover", (e) => {
+          if (e.target.closest(hoverables)) cursorRing.classList.add("hover");
+        });
+        document.addEventListener("mouseout", (e) => {
+          if (e.target.closest(hoverables)) cursorRing.classList.remove("hover");
+        });
+      }
+
+      console.log("%c thomasgoggin.com / setter-bot ", "background:#FFB800;color:#0a0d14;padding:6px 10px;font-family:monospace;font-weight:bold;font-size:12px");
+      console.log("%c the offer page. press V to flip the voice. ", "color:#8a93a8;font-family:monospace;font-size:11px");
+    })();
+  </script>
+</body>
+</html>

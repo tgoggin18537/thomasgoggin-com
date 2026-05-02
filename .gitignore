@@ -1,0 +1,8 @@
+# local tooling
+.claude/
+
+# editor / OS
+.DS_Store
+.vscode/
+.idea/
+*.swp
