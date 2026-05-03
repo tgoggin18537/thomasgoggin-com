@@ -1032,6 +1032,45 @@
         return div;
       }
 
+      function removeTyping(node) {
+        if (node && node.parentNode) node.parentNode.removeChild(node);
+      }
+
+      // Pace between bubbles. Scales with the length of the NEXT bubble so
+      // a 5-word ack feels snappy and a long sentence feels like the person
+      // actually typed it. Clamped to keep the demo responsive.
+      function bubbleDelayMs(text) {
+        const t = (text || "").length;
+        return Math.min(950, Math.max(450, Math.round(t * 14)));
+      }
+
+      // Render an array of bubbles one-by-one with a typing indicator
+      // between them. Used for both the opener and ongoing replies. The
+      // first bubble has no leading typing here because the caller already
+      // shows one while the fetch is in flight.
+      async function renderAssistantBubbles(bubbles) {
+        for (let i = 0; i < bubbles.length; i++) {
+          if (i > 0) {
+            const t = showTyping();
+            await new Promise((r) => setTimeout(r, bubbleDelayMs(bubbles[i])));
+            removeTyping(t);
+          }
+          appendBubble("assistant", bubbles[i]);
+        }
+      }
+
+      // Pull bubbles[] from a worker reply, fall back to reply string for
+      // pre-multi-bubble responses (keeps this safe if the worker rolls back).
+      function extractBubbles(data) {
+        if (Array.isArray(data && data.bubbles) && data.bubbles.length > 0) {
+          return data.bubbles.map((s) => String(s).trim()).filter(Boolean);
+        }
+        if (data && typeof data.reply === "string" && data.reply.trim()) {
+          return [data.reply.trim()];
+        }
+        return [];
+      }
+
       let chatHistory = [];
       let chatBotState = {};
       let chatEnded = false;
@@ -1040,7 +1079,15 @@
         if (!chatLog) return;
         chatLog.innerHTML = "";
         for (const m of chatHistory) {
-          appendBubble(m.role, m.content, { skipScroll: true });
+          if (m.role === "assistant" && typeof m.content === "string" && m.content.includes("\n\n")) {
+            // Multi-bubble assistant turn (saved as joined form). Split
+            // and render each as its own bubble — no typing delay on a
+            // hydrate, just paint it.
+            const parts = m.content.split(/\n{2,}/g).map((s) => s.trim()).filter(Boolean);
+            for (const p of parts) appendBubble("assistant", p, { skipScroll: true });
+          } else {
+            appendBubble(m.role, m.content, { skipScroll: true });
+          }
         }
         chatLog.scrollTop = chatLog.scrollHeight;
       }
@@ -1084,12 +1131,17 @@
             return;
           }
           const data = await res.json();
-          if (!data.ok || !data.reply) {
+          const bubbles = extractBubbles(data);
+          if (!data.ok || bubbles.length === 0) {
             appendError("the bot couldnt land a reply that turn, try rephrasing");
             return;
           }
-          chatHistory.push({ role: "assistant", content: data.reply });
-          appendBubble("assistant", data.reply);
+          // Store the joined version as a single history entry so the
+          // conversation Claude sees stays alternating user/assistant
+          // cleanly. Render each bubble separately for the human eye.
+          const joined = bubbles.join("\n\n");
+          chatHistory.push({ role: "assistant", content: joined });
+          await renderAssistantBubbles(bubbles);
           chatBotState = data.state || chatBotState;
           if (data.ended) setEnded(true);
           saveChatState({ history: chatHistory, state: chatBotState, ended: chatEnded });
@@ -1132,10 +1184,12 @@
           if (typing && typing.parentNode) typing.parentNode.removeChild(typing);
           if (res.ok) {
             const data = await res.json();
-            if (data.ok && data.reply) {
-              chatHistory.push({ role: "assistant", content: data.reply });
+            const bubbles = extractBubbles(data);
+            if (data.ok && bubbles.length > 0) {
+              const joined = bubbles.join("\n\n");
+              chatHistory.push({ role: "assistant", content: joined });
               chatBotState = data.state || {};
-              appendBubble("assistant", data.reply);
+              await renderAssistantBubbles(bubbles);
               saveChatState({ history: chatHistory, state: chatBotState, ended: false });
               return;
             }
